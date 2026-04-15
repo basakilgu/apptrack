@@ -1,24 +1,26 @@
-# AppTrack — Product Requirements Document (PRD)
+# Applyze — Ürün Gereksinimleri Dokümanı (PRD)
 
-**Versiyon:** v1.0  
-**Durum:** ONAYLANDI  
+**Versiyon:** v2.0  
+**Durum:** Taslak  
 **Tarih:** Nisan 2026  
-**Ürün:** AppTrack  
+**Ürün:** Applyze  
+
+> Bu doküman geliştirici referansıdır. Ürünün ne olduğu, neden yapıldığı ve pazara çıkış stratejisi için bkz. MVP Kapsam Dokümanı v2.0.
 
 ---
 
 ## İçindekiler
 
 1. [Değişiklik Geçmişi](#1-değişiklik-geçmişi)
-2. [Ürün Genel Bakış](#2-ürün-genel-bakış)
-3. [Hedefler ve Başarı Kriterleri](#3-hedefler-ve-başarı-kriterleri)
-4. [Kullanıcı Personaları](#4-kullanıcı-personaları)
-5. [Epikler ve Özellik Haritası](#5-epikler-ve-özellik-haritası)
-6. [Fonksiyonel Gereksinimler](#6-fonksiyonel-gereksinimler)
-7. [Kullanıcı Hikayeleri](#7-kullanıcı-hikayeleri)
-8. [Fonksiyonel Olmayan Gereksinimler (NFR)](#8-fonksiyonel-olmayan-gereksinimler-nfr)
-9. [Tasarım Gereksinimleri](#9-tasarım-gereksinimleri)
-10. [Veri Gereksinimleri](#10-veri-gereksinimleri)
+2. [Ürün Tanımı ve Kapsam](#2-ürün-tanımı-ve-kapsam)
+3. [Kullanıcı Personaları](#3-kullanıcı-personaları)
+4. [Epikler ve Özellik Haritası](#4-epikler-ve-özellik-haritası)
+5. [Fonksiyonel Gereksinimler](#5-fonksiyonel-gereksinimler)
+6. [Kullanıcı Hikayeleri ve Kabul Kriterleri](#6-kullanıcı-hikayeleri-ve-kabul-kriterleri)
+7. [Fonksiyonel Olmayan Gereksinimler](#7-fonksiyonel-olmayan-gereksinimler)
+8. [Tasarım Gereksinimleri](#8-tasarım-gereksinimleri)
+9. [Veri Gereksinimleri](#9-veri-gereksinimleri)
+10. [Teknik Mimari](#10-teknik-mimari)
 11. [Teknik Kısıtlamalar ve Bağımlılıklar](#11-teknik-kısıtlamalar-ve-bağımlılıklar)
 12. [Yayın Kabul Kriterleri](#12-yayın-kabul-kriterleri)
 13. [Kapsam Dışı Kararlar](#13-kapsam-dışı-kararlar)
@@ -31,491 +33,434 @@
 | Versiyon | Tarih | Değişiklik |
 |---------|-------|-----------|
 | v0.1 | Mart 2026 | İlk taslak — vizyon ve persona bölümleri |
-| v0.2 | Mart 2026 | Epikler, fonksiyonel gereksinimler, user story'ler |
-| v0.3 | Nisan 2026 | NFR'lar, tasarım gereksinimleri, veri modeli |
-| v1.0 | Nisan 2026 | Final — tüm bölümler tamamlandı, kabul kriterleri eklendi |
+| v0.2 | Mart 2026 | Epikler, fonksiyonel gereksinimler, kullanıcı hikayeleri |
+| v0.3 | Nisan 2026 | Fonksiyonel olmayan gereksinimler, tasarım gereksinimleri, veri modeli |
+| v1.0 | Nisan 2026 | İlk tam versiyon |
+| v2.0 | Nisan 2026 | Doküman ayrımı refactor, metrik etiketleme, persona güncelleme, silme kararı, oto doldur risk planı, elenme analizi cold start çözümü |
 
 ---
 
-## 2. Ürün Genel Bakış
+## 2. Ürün Tanımı ve Kapsam
 
-### 2.1 Ürün Tanımı
+### Ürün Tanımı
 
-> AppTrack, Türkiye'deki iş arayanların LinkedIn, Kariyer.net, Youthall ve Anbean gibi birden fazla platformdaki iş başvurularını tek bir mobil uygulamada takip etmelerini, süreçlerini yönetmelerini ve kariyer verilerini analiz etmelerini sağlayan iOS ve Android için geliştirilmiş mobil uygulamadır.
+Applyze, iş arayanların Kariyer.net, LinkedIn, Youthall ve Anbean gibi birden fazla platformdaki iş başvurularını tek bir mobil uygulamada takip etmelerini, süreçlerini yönetmelerini ve kariyer verilerini analiz etmelerini sağlayan iOS ve Android uygulamasıdır.
 
-### 2.2 Vizyon & Misyon
-
-| | |
-|--|--|
-| **Vizyon** | Türkiye'deki her iş arayanın kariyer sürecini şeffaf, ölçülebilir ve stratejik hale getirmek. |
-| **Misyon** | Dağınık iş arama sürecini anlamlı veriye dönüştüren, Türk platformlarını destekleyen, gizlilik öncelikli en iyi mobil kariyer takip aracı olmak. |
-| **Kuzey Yıldızı** | Kullanıcı başına aylık aktif başvuru sayısı. |
-
-### 2.3 Çözülen Problemler
-
-| Problem | Etkilenen Kullanıcı | Çözüm |
-|--------|-------------------|-------|
-| 4-5 farklı platformu ayrı takip etmek | Tüm kullanıcılar | Tek uygulama, çoklu platform |
-| Başvuru geçmişinin olmaması | Tüm kullanıcılar | Kalıcı arşiv, silinmeyen veri |
-| Hangi aşamada elenildiğini bilmemek | Aktif iş arayanlar | Elenme analizi ve funnel |
-| Patrona sezdirme korkusu | Çalışırken iş arayanlar | Gizlilik öncelikli bildirim |
-| Türk platformlarını destekleyen araç yok | Türkiye pazarı | Yerel scraper |
-
-### 2.4 Kapsam
+### Kapsam
 
 | | |
 |--|--|
-| **Kapsam İÇİ** | Başvuru ekleme (link+manuel), aşama takibi (Kanban), arşiv, dashboard, elenme analizi, bildirimler, duplicate uyarısı, özelleştirilebilir aşamalar, başvuru detayı |
-| **Kapsam DIŞI** | LinkedIn oto doldur, ilan aggregation, sosyal özellikler, CV builder, web uygulaması, AI tavsiye, streak sistemi |
+| **Kapsam İÇİ** | Başvuru ekleme (link + manuel), aşama takibi (görsel tahta), arşiv, gösterge paneli, elenme analizi, bildirimler, tekrarlayan başvuru uyarısı, özelleştirilebilir aşamalar, başvuru detayı, başvuru silme |
+| **Kapsam DIŞI** | LinkedIn otomatik bilgi çekme, ilan toplama, sosyal özellikler, CV oluşturucu, web uygulaması, yapay zeka tavsiyesi, seri sistemi |
 | **Platform** | iOS 16+ ve Android 10+ |
 | **Dil** | Türkçe (v1) |
 | **Monetizasyon** | v1'de tamamen ücretsiz |
 
 ---
 
-## 3. Hedefler ve Başarı Kriterleri
+## 3. Kullanıcı Personaları
 
-### 3.1 İş Hedefleri
+> ⚠️ Aşağıdaki personalar gözlem ve varsayıma dayanmaktadır. Kullanıcı araştırması henüz tamamlanmamıştır. Sprint 1 öncesinde veya launch sonrasında gerçek görüşmelerle doğrulanacak ve gerekirse revize edilecektir. **Etiket: Hipotez**
 
-1. İlk 3 ayda 500+ organik indirme (App Store + Google Play)
-2. İlk 3 ayda 300+ kayıtlı kullanıcı
-3. Kullanıcı başına aylık ortalama 8+ başvuru kaydı
-4. App Store'da 4.2+ puan, ilk 90 günde
-5. DAU/MAU oranı > %40
-
-### 3.2 OKR Çerçevesi
-
-| Amaç | Anahtar Sonuç | Hedef | Ölçüm |
-|------|-------------|-------|-------|
-| Kullanıcı tabanı oluştur | Kayıtlı kullanıcı sayısı | 300 | Supabase Auth |
-| Kullanıcı tabanı oluştur | 7. gün retention | ≥%50 | Amplitude cohort |
-| Temel değeri kanıtla | Kullanıcı başına başvuru/ay | ≥8 | DB query |
-| Temel değeri kanıtla | Oto doldur başarısı (Kariyer.net) | ≥%80 | Edge Function log |
-| Kaliteyi sağla | App Store puanı | ≥4.2 | App Store Connect |
-| Kaliteyi sağla | Crash rate | <%0.5 | Expo Crash |
-
-### 3.3 Metrik Tanımları
-
-| Metrik | Tanım | Ölçüm |
-|--------|-------|-------|
-| DAU/MAU | Günlük aktif / aylık aktif oran. %40 hedef. | Amplitude |
-| 7. Gün Retention | Kaydolan kullanıcıların 7. günde hâlâ aktif olma oranı. | Cohort analizi |
-| Oto Doldur Başarısı | Link yapıştırılınca alanların doğru dolma oranı. | Edge Function log |
-| Kuzey Yıldızı | Kullanıcı başına aylık aktif başvuru sayısı. | Supabase query |
-
----
-
-## 4. Kullanıcı Personaları
-
-### 4.1 Birincil Persona — Çalışırken İş Arayan Yeni Mezun
-
-| Özellik | Detay |
-|--------|-------|
-| **İsim** | Ayşe Yılmaz, 23 yaş, İstanbul |
-| **Meslek** | Süreç Tasarım Uzmanı, tam zamanlı çalışıyor (8 ay) |
-| **Eğitim** | Endüstri Mühendisliği mezunu |
-| **Teknoloji** | iPhone kullanıcısı, mobil-first davranış |
-| **İş arama** | 4 aydır aktif olarak arıyor |
-| **Platformlar** | LinkedIn, Kariyer.net, Youthall, Anbean |
-| **Aktif saat** | Akşam 21:00–23:00 ve öğle molası 12:30–13:00 |
-| **Mevcut araç** | Notes + Excel (dağınık, yetersiz) |
-
-| Boyut | Detay |
-|-------|-------|
-| Motivasyon | Daha iyi kariyer fırsatı. Liderlik programları, büyük şirket, uluslararası fırsat. |
-| Hedef | Ayda 15-20 nitelikli başvuru, 2-3 mülakat. Stratejiyle iş aramak. |
-| Engeller | Sınırlı zaman, patronun fark etme korkusu, hangi platformda ne başvurduğunu unutma. |
-| Teknoloji yetkinliği | Yüksek — ama uzun onboarding'de vazgeçiyor. |
-| Ödeme isteği | Ücretsiz başlamasını bekliyor. Premium için aylık ₺30-50 makul. |
-
-**Ayşe'nin Sözleri:**
-> "Her sabah 4-5 farklı uygulamayı açıyorum, hangisine başvurmuştum bilmiyorum."
-
-> "HR görüşmesinde eleniyorum genelde ama neden bilmiyorum. Bir pattern var mı acaba?"
-
-> "Telefonu masada bırakınca amirimin bildirimi görmesinden korkuyorum."
-
-> "3 ay önce başvurduğum şirkete tekrar başvurdum. Aynı şirkete iki kez başvurmuştum."
-
-### 4.2 İkincil Persona — Yeni Mezun, İlk İşini Arayan
+### Birincil Persona — Aktif İş Arayan Yeni Mezun
 
 | Özellik | Detay |
 |--------|-------|
 | **İsim** | Mehmet Kaya, 22 yaş, Ankara |
-| **Meslek** | İşletme mezunu, ilk işini arıyor (6 aydır) |
-| **Durum** | Tam zamanlı iş arama, çalışmıyor |
+| **Meslek** | İşletme mezunu, ilk işini arıyor |
+| **Durum** | Tam zamanlı iş arama |
 | **Teknoloji** | Android kullanıcısı |
 | **Platformlar** | Youthall ağırlıklı, LinkedIn, Kariyer.net |
-| **Başvuru hacmi** | Haftada 20-30 başvuru (yüksek hacim) |
+| **Başvuru hacmi** | Haftada 20-30 başvuru |
 | **Mevcut araç** | Google Sheets (artık yönetilemez durumda) |
 
-> Mehmet'in temel ihtiyacı: Yüksek hacimli başvuruları organize etmek. Başvuru eklemenin çok hızlı ve sürtünmesiz olması kritik. Günde 5-6 başvuru ekleyebilmeli.
+| Boyut | Detay |
+|-------|-------|
+| Motivasyon | Bir an önce iş bulmak. Her başvuru bir adım. |
+| Hedef | Organizasyon. Neye başvurduğunu, nerede olduğunu bilmek. |
+| Engeller | Yüksek hacim, dağınık platform, tekrarlayan başvurular. |
+| Tasarım önceliği | Hız. Başvuru ekleme sürtünmesiz olmalı. |
 
-### 4.3 Persona Karşılaştırması
+### İkincil Persona — Çalışırken İş Arayan
 
-| Boyut | Ayşe (Birincil) | Mehmet (İkincil) |
-|-------|----------------|-----------------|
-| Durum | Çalışırken iş arıyor | Yalnızca iş arıyor |
-| Başvuru hacmi | Haftada 5-10 (seçici) | Haftada 20-30 (hacimli) |
-| Öncelikli özellik | Analiz ve gizlilik | Hızlı ekleme ve organizasyon |
-| Gizlilik ihtiyacı | Çok yüksek | Düşük |
-| Analiz ihtiyacı | Yüksek | Orta |
-| Ödeme isteği | Orta | Düşük |
-| Tasarım önceliği | Bildirim gizliliği | Hızlı giriş ve yükleme |
+| Özellik | Detay |
+|--------|-------|
+| **İsim** | Ayşe Yılmaz, 23 yaş, İstanbul |
+| **Meslek** | Süreç Tasarım Uzmanı, tam zamanlı çalışıyor |
+| **Durum** | Çalışırken kariyer değişikliği arıyor |
+| **Teknoloji** | iPhone kullanıcısı |
+| **Platformlar** | LinkedIn, Kariyer.net, Youthall, Anbean |
+| **Başvuru hacmi** | Haftada 5-10 başvuru (seçici) |
+| **Mevcut araç** | Notes + Excel |
 
----
+| Boyut | Detay |
+|-------|-------|
+| Motivasyon | Daha iyi kariyer fırsatı, liderlik programları. |
+| Hedef | Stratejiyle iş aramak. Hangi aşamada elendiğini anlamak. |
+| Engeller | Sınırlı zaman, patronun fark etme korkusu. |
+| Tasarım önceliği | Gizlilik öncelikli bildirimler, analiz ekranı. |
 
-## 5. Epikler ve Özellik Haritası
+### Persona Karşılaştırması
 
-> **MoSCoW Tanımları:**
-> - **Must** — Olmadan ürün değer üretemiyor. MVP'nin çekirdeği.
-> - **Should** — Önemli ama olmadan yayına alınabilir.
-> - **Could** — İyi olur ama zaman ve kaynak varsa.
-> - **Won't** — Bu sürümde kesinlikle hayır.
-
-### EP-01: Kimlik Doğrulama & Kullanıcı Yönetimi
-*Kullanıcının güvenli kayıt/giriş ve veri izolasyonu.*
-
-| Özellik ID | Özellik Adı | Öncelik | Sprint |
-|-----------|------------|---------|--------|
-| F-01 | Email & şifre ile kayıt | Must | S1 |
-| F-02 | Google OAuth girişi | Must | S1 |
-| F-03 | Oturum yönetimi (30 gün) | Must | S1 |
-| F-04 | Şifre sıfırlama | Should | S1 |
-| F-05 | Hesap silme ve veri imhası | Should | S2 |
-| F-06 | Profil düzenleme | Could | S3 |
-
-### EP-02: Başvuru Yönetimi
-*İş başvurularının eklenip güncellenebildiği temel CRUD işlemleri.*
-
-| Özellik ID | Özellik Adı | Öncelik | Sprint |
-|-----------|------------|---------|--------|
-| F-07 | Link → oto doldur (Kariyer.net) | Must | S1 |
-| F-08 | Link → oto doldur (Youthall) | Must | S1 |
-| F-09 | Link → oto doldur (Anbean) | Should | S1 |
-| F-10 | Manuel ilan ekleme formu | Must | S1 |
-| F-11 | Başvuru düzenleme | Must | S1 |
-| F-12 | Başvuru detay sayfası | Must | S2 |
-| F-13 | Not ekleme (başvuru bazlı) | Should | S2 |
-| F-14 | İletişim kişisi kaydetme | Could | S3 |
-| F-15 | Mülakat tarihi ve hatırlatıcı | Could | S3 |
-| F-16 | Belge ekleme | Won't | — |
-
-### EP-03: Görüntüleme ve Navigasyon
-*Başvuruların farklı bakış açılarıyla incelenebildiği ekranlar.*
-
-| Özellik ID | Özellik Adı | Öncelik | Sprint |
-|-----------|------------|---------|--------|
-| F-17 | Kanban board | Must | S1 |
-| F-18 | Sürükle-bırak aşama değiştirme | Must | S1 |
-| F-19 | Başvuru arşivi (liste) | Must | S1 |
-| F-20 | Arşiv arama | Must | S1 |
-| F-21 | Arşiv filtreleme | Should | S2 |
-| F-22 | Dashboard ana ekran | Must | S1 |
-| F-23 | Platform renk kodlaması | Should | S1 |
-| F-24 | Başvuru sıralama seçenekleri | Could | S2 |
-
-### EP-04: Analitik ve İçgörü
-*Kullanıcının biriken veriden anlam çıkarabilmesi.*
-
-| Özellik ID | Özellik Adı | Öncelik | Sprint |
-|-----------|------------|---------|--------|
-| F-25 | Dashboard metrik kartları | Must | S2 |
-| F-26 | Aşama dağılımı grafiği | Should | S2 |
-| F-27 | Elenme analizi funneli | Should | S3 |
-| F-28 | Pozisyon/sektör başarı karşılaştırması | Should | S3 |
-| F-29 | Ortalama geri dönüş süresi | Could | S3 |
-| F-30 | AI kişisel öneri metni | Won't | — |
-
-### EP-05: Bildirimler ve Engagement
-*Günlük kullanım ve önemli olaylar için bildirim sistemi.*
-
-| Özellik ID | Özellik Adı | Öncelik | Sprint |
-|-----------|------------|---------|--------|
-| F-31 | Hareketsizlik push bildirimi | Should | S3 |
-| F-32 | Bildirim gizlilik modu | Must | S3 |
-| F-33 | Duplicate ilan uyarısı | Should | S3 |
-| F-34 | Özelleştirilebilir aşamalar | Should | S2 |
-| F-35 | Bildirim ayarları | Should | S3 |
-| F-36 | Streak sistemi | Won't | — |
+| Boyut | Mehmet (Birincil) | Ayşe (İkincil) |
+|-------|------------------|----------------|
+| Durum | Yalnızca iş arıyor | Çalışırken iş arıyor |
+| Başvuru hacmi | Haftada 20-30 (hacimli) | Haftada 5-10 (seçici) |
+| Öncelikli özellik | Hızlı ekleme ve organizasyon | Analiz ve gizlilik |
+| Gizlilik ihtiyacı | Düşük | Çok Yüksek |
+| Analiz ihtiyacı | Orta | Yüksek |
 
 ---
 
-## 6. Fonksiyonel Gereksinimler
+## 4. Epikler ve Özellik Haritası
 
-### 6.1 Kimlik Doğrulama (AUTH)
+> **Önceliklendirme Tanımları (MoSCoW):**
+> - **Olmazsa Olmaz** — Olmadan ürün değer üretemiyor.
+> - **Olmalı** — Önemli ama olmadan yayına alınabilir.
+> - **Olsa İyi** — Zaman ve kaynak varsa.
+> - **Olmayacak** — Bu sürümde kesinlikle hayır.
 
-| ID | Gereksinim | Öncelik | Kabul Kriteri |
-|----|-----------|---------|--------------|
-| AUTH-01 | Email ve şifre ile kayıt | Must | Email format doğrulanır. Şifre min 8 karakter, 1 büyük harf, 1 rakam. Onay maili gider. |
-| AUTH-02 | Google OAuth girişi | Must | Flow 3 sn altında. İlk girişte profil otomatik oluşturulur. |
-| AUTH-03 | Oturum 30 gün açık kalmalı | Must | Refresh token ile 30 gün. Kullanıcı çıkış yapana kadar şifre sorulmaz. |
-| AUTH-04 | 5 başarısız girişte 15 dk blok | Must | 6. denemede blok uygulanır. Kalan süre gösterilir. |
-| AUTH-05 | Şifre sıfırlama maili | Should | Link 24 saat geçerli. Kullanıldıktan sonra geçersiz. |
-| AUTH-06 | Hesap silme | Should | Onay ekranı. 30 gün soft delete → hard delete. |
+### EP-01: Kimlik Doğrulama ve Kullanıcı Yönetimi
 
-### 6.2 Başvuru Ekleme (ADD)
-
-| ID | Gereksinim | Öncelik | Kabul Kriteri |
-|----|-----------|---------|--------------|
-| ADD-01 | Kariyer.net linki oto doldurmalı | Must | Başarı ≥%80. Timeout 10 sn. Başarısızlıkta manuel yönlendirme. |
-| ADD-02 | Youthall linki oto doldurmalı | Must | ADD-01 ile aynı kriter. |
-| ADD-03 | Anbean linki oto doldurmalı | Should | Başarı ≥%70. |
-| ADD-04 | LinkedIn için direkt manuel akışa geçilmeli | Must | LinkedIn URL tespit edilince scraping denenmez. 'Desteklenmiyor' mesajı. |
-| ADD-05 | Şirket + pozisyon zorunlu alan | Must | Boş bırakılınca form kaydedilmez. Alan kırmızı. Hata mesajı Türkçe. |
-| ADD-06 | Platform dropdown | Should | LinkedIn, Kariyer.net, Youthall, Anbean, Şirket Sitesi, Diğer. |
-| ADD-07 | Başvuru tarihi varsayılan bugün | Should | Tarih picker ile geçmişe dönük ekleme desteklenir. |
-| ADD-08 | Not alanı opsiyonel | Should | Max 500 karakter. Sayaç gösterilir. |
-
-### 6.3 Kanban ve Aşama Yönetimi (KAN)
-
-| ID | Gereksinim | Öncelik | Kabul Kriteri |
-|----|-----------|---------|--------------|
-| KAN-01 | Başvurular aşama sütunlarında görüntülenmeli | Must | Sütun başında başvuru sayısı. Varsayılan aşamalar hazır. |
-| KAN-02 | Sürükle-bırak ile aşama güncellenebilmeli | Must | Haptic feedback. Animasyonlu geçiş. 50 kartlı board'da ≥60fps. |
-| KAN-03 | Karta tap ile detay açılmalı | Must | Modal veya push navigation. |
-| KAN-04 | Kartlarda şirket, pozisyon, göreli tarih | Must | '5 gün önce' formatı. Platform renk kodu. |
-| KAN-05 | Long press ile hızlı aşama menüsü | Should | Bottom sheet. Mevcut aşama işaretli. |
-| KAN-06 | 'Elenildi' sütunu görsel olarak ayrışmalı | Should | Gri ton. Demotive etmeden ayrıştırma. |
-
-### 6.4 Arşiv (ARCH)
-
-| ID | Gereksinim | Öncelik | Kabul Kriteri |
-|----|-----------|---------|--------------|
-| ARCH-01 | Tüm başvurular liste görünümünde | Must | Son güncellemeye göre sıralı. Lazy load. |
-| ARCH-02 | Şirket veya pozisyon adıyla arama | Must | 300ms debounce. Anlık filtreleme. |
-| ARCH-03 | Platform ve aşamaya göre filtreleme | Should | Çoklu seçim desteklenen chip'ler. |
-| ARCH-04 | Başvurular silinemez | Must | Silme butonu olmaz. 'Arşiv kalıcıdır' açıklaması. |
-| ARCH-05 | 100+ başvuruda performans düşmemeli | Must | Virtual list rendering. |
-
-### 6.5 Başvuru Detayı (DET)
-
-| ID | Gereksinim | Öncelik | Kabul Kriteri |
-|----|-----------|---------|--------------|
-| DET-01 | Tüm başvuru bilgileri tek ekranda | Must | Şirket, pozisyon, platform, tarih, aşama, URL, notlar. |
-| DET-02 | Aşama geçmiş kronolojisi | Must | 'HR → Teknik Mülakat (3 Mart)' timeline. En yeni üstte. |
-| DET-03 | Not eklenip görüntülenebilmeli | Should | Zaman damgalı. Birden fazla not. Max 2000 karakter. |
-| DET-04 | 'İlanı Aç' butonu | Should | İlan silinmişse uyarı gösterilir. |
-| DET-05 | Mülakat tarihi ve saati | Could | Tarih-saat picker. Takvime ekle seçeneği. |
-
-### 6.6 Analitik ve Dashboard (ANL)
-
-| ID | Gereksinim | Öncelik | Kabul Kriteri |
-|----|-----------|---------|--------------|
-| ANL-01 | Dashboard metrik kartları | Must | Bu ay / bu hafta / toplam sayaçlar. Gerçek zamanlı. |
-| ANL-02 | Dashboard her açılışta anlamlı içerik | Must | 0 başvuruda CTA. 1+ başvuruda metrikler. |
-| ANL-03 | Aşama dağılımı grafiği | Should | Bar veya donut chart. Aşama renkleriyle eşleşir. |
-| ANL-04 | Elenme funneli | Should | Min 10 tamamlanmış başvuru. Altında 'yetersiz veri' mesajı. |
-| ANL-05 | Pozisyon bazlı başarı karşılaştırması | Should | Min 5 başvuru/pozisyon. Bar chart. |
-
-### 6.7 Bildirimler (NOT)
-
-| ID | Gereksinim | Öncelik | Kabul Kriteri |
-|----|-----------|---------|--------------|
-| NOT-01 | 14+ gün güncelleme yok bildirimi | Should | Varsayılan 14 gün. 7/14/21/30 gün seçenekleri. Elenildi hariç. |
-| NOT-02 | Bildirim önizlemesi şirket adı içermemeli | Must | Önizleme: 'AppTrack — Takip edilecek başvurular var.' |
-| NOT-03 | Tap ile deep link | Should | Direkt başvuru detay ekranı. Uygulama kapalıysa açılır. |
-| NOT-04 | 09:00-21:00 arası bildirim | Should | Kullanıcı time zone'u referans. |
-| NOT-05 | Bildirimler ayarlardan kapatılabilmeli | Should | Toggle. Kapalıyken uygulama içi banner. |
-
-### 6.8 Özelleştirilebilir Aşamalar (STG)
-
-| ID | Gereksinim | Öncelik | Kabul Kriteri |
-|----|-----------|---------|--------------|
-| STG-01 | Varsayılan 5 aşama hazır gelmeli | Must | Başvuruldu, HR Görüşmesi, Teknik Mülakat, Teklif Aşaması, Elenildi. |
-| STG-02 | Aşama adı düzenlenebilmeli | Should | Inline edit. Max 40 karakter. |
-| STG-03 | Yeni aşama eklenebilmeli | Should | '+' buton. İsim + renk. Max 12 aşama. |
-| STG-04 | Aşama silinince içindekiler taşınmalı | Should | 'Bu başvurular nereye taşınsın?' sorusu. Silme bloklanmaz. |
-| STG-05 | En az 2 aşama zorunlu | Must | Son aşama silinemez. |
-
-### 6.9 Duplicate Uyarısı (DUP)
-
-| ID | Gereksinim | Öncelik | Kabul Kriteri |
-|----|-----------|---------|--------------|
-| DUP-01 | Aynı URL eklenince uyarı | Should | URL eşleşmesi. Modal uyarı + önceki başvuru özeti. |
-| DUP-02 | Şirket+pozisyon eşleşmesi 90 gün içinde | Should | %85+ fuzzy match. 90 gün penceresi. |
-| DUP-03 | Uyarıya rağmen eklenebilmeli | Must | 'Yine de Ekle' her zaman mevcut. Engelleme yapılmaz. |
-| DUP-04 | Daha önce elenilen ilana özel mesaj | Should | 'Bu pozisyondan önceden elendin (Aşama X, Tarih Y)' mesajı. |
-
----
-
-## 7. Kullanıcı Hikayeleri
-
-> Format: *"Bir [kullanıcı türü] olarak, [hedef] için [eylem] yapmak istiyorum."*
-
-### EP-01: Kimlik Doğrulama
-
-| # | User Story | Kabul Kriteri | Öncelik |
-|---|-----------|--------------|---------|
-| 1 | Bir iş arayan olarak, email ve şifremle kayıt olabilmek istiyorum ki verilerimi güvende tutayım. | Email doğrulanır. Şifre kriteri karşılanır. Onay maili gider. Dashboard'a yönlendirilir. | Must |
-| 2 | Bir kullanıcı olarak, Google ile tek tıkta giriş yapmak istiyorum ki şifre hatırlamayayım. | OAuth flow 3 sn altında. İlk girişte profil oluşturulur. | Must |
-| 3 | Bir kullanıcı olarak, her açışımda giriş yapmak istemiyorum. | 30 günlük oturum. Kullanıcı çıkış yapana kadar token geçerli. | Must |
-| 4 | Bir kullanıcı olarak, şifremi unutunca sıfırlayabilmek istiyorum. | Mail 5 dk içinde gelir. Link 24 saat geçerli. | Should |
+| Özellik ID | Özellik Adı | Öncelik | Sprint |
+|-----------|------------|---------|--------|
+| F-01 | Email ve şifre ile kayıt | Olmazsa Olmaz | S1 |
+| F-02 | Google ile giriş | Olmazsa Olmaz | S1 |
+| F-03 | Oturum yönetimi (30 gün) | Olmazsa Olmaz | S1 |
+| F-04 | Şifre sıfırlama | Olmalı | S1 |
+| F-05 | Hesap silme ve veri imhası | Olmalı | S2 |
+| F-06 | Profil düzenleme | Olsa İyi | S3 |
 
 ### EP-02: Başvuru Yönetimi
 
-| # | User Story | Kabul Kriteri | Öncelik |
-|---|-----------|--------------|---------|
-| 1 | Aktif iş arayan olarak, Kariyer.net linkini yapıştırıp bilgilerin otomatik dolmasını istiyorum. | Şirket, pozisyon, lokasyon 3 sn içinde dolar. Başarısızlıkta açıklayıcı mesaj. | Must |
-| 2 | Bir kullanıcı olarak, LinkedIn ilanlarını da ekleyebilmek istiyorum, link çalışmasa bile. | LinkedIn URL tespit edilir. Manuel forma yönlendirilir. Net mesaj gösterilir. | Must |
-| 3 | Patron dikkatine karşı temkinli kullanıcı olarak, ekleme sürecinin çok kısa sürmesini istiyorum. | En kısa akış: link yapıştır → tek onay. 10 saniyenin altında. | Must |
-| 4 | Bir kullanıcı olarak, başvuruyu eklerken not bırakabilmek istiyorum. | Opsiyonel not alanı. Max 500 karakter. | Should |
-| 5 | Bir kullanıcı olarak, 3 ay önce eklediğim başvuruyu düzenleyebilmek istiyorum. | Tüm başvurular düzenlenebilir. Zorunlu alanlar boş bırakılamaz. | Must |
+| Özellik ID | Özellik Adı | Öncelik | Sprint |
+|-----------|------------|---------|--------|
+| F-07 | Link → otomatik bilgi çekme (Kariyer.net) | Olmazsa Olmaz | S1 |
+| F-08 | Link → otomatik bilgi çekme (Youthall) | Olmazsa Olmaz | S1 |
+| F-09 | Link → otomatik bilgi çekme (Anbean) | Olmalı | S1 |
+| F-10 | Manuel başvuru ekleme | Olmazsa Olmaz | S1 |
+| F-11 | Başvuru düzenleme | Olmazsa Olmaz | S1 |
+| F-12 | Başvuru silme (onay dialogu + yumuşak silme) | Olmalı | S2 |
+| F-13 | Tekrarlayan başvuru uyarısı | Olmalı | S3 |
 
-### EP-03: Görüntüleme
+### EP-03: Aşama Yönetimi
 
-| # | User Story | Kabul Kriteri | Öncelik |
-|---|-----------|--------------|---------|
-| 1 | Bir kullanıcı olarak, tüm başvurularımı aşamalara göre tek bakışta görmek istiyorum. | Kanban board. Sütun başında sayı. Kart formatında şirket+pozisyon. | Must |
-| 2 | Bir kullanıcı olarak, başvuruyu HR'dan Teknik'e sürükleyerek taşımak istiyorum. | Drag & drop çalışır. Haptic + animasyon. 50 kartlı board'da sorunsuz. | Must |
-| 3 | Bir kullanıcı olarak, '3 ay önce hangi şirkete başvurmuştum?' sorusunu 5 sn cevaplayabilmek istiyorum. | Arşiv arama: şirket adı yazınca anlık sonuç. 300ms debounce. | Must |
-| 4 | Bir kullanıcı olarak, sadece HR aşamasındakileri filtreleyebilmek istiyorum. | Filtre chip. Tek veya çoklu aşama seçimi. | Should |
+| Özellik ID | Özellik Adı | Öncelik | Sprint |
+|-----------|------------|---------|--------|
+| F-14 | Varsayılan aşamalar | Olmazsa Olmaz | S1 |
+| F-15 | Aşama değiştirme (sürükle-bırak ve alt sayfa) | Olmazsa Olmaz | S1 |
+| F-16 | Özelleştirilebilir aşamalar (ekle/sil/yeniden adlandır) | Olmalı | S2 |
+| F-17 | Aşama geçmişi kaydı | Olmalı | S2 |
 
-### EP-04: Analitik
+### EP-04: Görsel Takip Tahtası
 
-| # | User Story | Kabul Kriteri | Öncelik |
-|---|-----------|--------------|---------|
-| 1 | Bir kullanıcı olarak, 'Bu ay kaç başvuru yaptım?' sorusunu uygulamayı açınca görmek istiyorum. | Dashboard metrik kartları. Bu ay/hafta/toplam sayaçlar. Gerçek zamanlı. | Must |
-| 2 | Stratejik kullanıcı olarak, hangi aşamada elendiğimi görsel görmek istiyorum. | Funnel chart. Min 10 tamamlanmış başvuru. Eksikse 'yetersiz veri'. | Should |
-| 3 | Bir kullanıcı olarak, dashboard her açılışta boş değil anlamlı içerik göstermeli. | 0 başvuruda CTA. 1+ başvuruda kişisel metrikler. | Must |
+| Özellik ID | Özellik Adı | Öncelik | Sprint |
+|-----------|------------|---------|--------|
+| F-18 | Sütun tabanlı görsel takip | Olmazsa Olmaz | S1 |
+| F-19 | Sürükle-bırak ile aşama güncelleme | Olmazsa Olmaz | S1 |
+| F-20 | Kart üzerinde özet bilgi | Olmazsa Olmaz | S1 |
+| F-21 | Platform renk kodu | Olmalı | S1 |
 
-### EP-05: Bildirimler
+### EP-05: Arşiv
 
-| # | User Story | Kabul Kriteri | Öncelik |
-|---|-----------|--------------|---------|
-| 1 | Çalışırken iş arayan olarak, patron bildirimi görse bile şirketi anlamamalı. | Önizleme: 'AppTrack — Takip edilecek başvurular var.' Şirket adı yok. | Must |
-| 2 | Meşgul kullanıcı olarak, 14 gün haber alamadığım başvuru için hatırlatma almak istiyorum. | 14 gün eşik. 09:00-21:00. Elenildi hariç. | Should |
-| 3 | Bir kullanıcı olarak, 3 ay önce başvurduğum şirkete tekrar başvurunca uyarı almak istiyorum. | URL veya şirket+pozisyon eşleşmesi. Modal. 'Yine de ekle' mevcut. | Should |
+| Özellik ID | Özellik Adı | Öncelik | Sprint |
+|-----------|------------|---------|--------|
+| F-22 | Tüm başvurular listesi | Olmazsa Olmaz | S1 |
+| F-23 | Metin araması | Olmazsa Olmaz | S1 |
+| F-24 | Platform filtresi | Olmalı | S2 |
+| F-25 | Aşama filtresi | Olmalı | S2 |
+| F-26 | Tarih sıralaması | Olsa İyi | S2 |
 
----
+### EP-06: Başvuru Detayı
 
-## 8. Fonksiyonel Olmayan Gereksinimler (NFR)
+| Özellik ID | Özellik Adı | Öncelik | Sprint |
+|-----------|------------|---------|--------|
+| F-27 | Not ekleme ve düzenleme | Olmalı | S2 |
+| F-28 | Aşama geçmişi görüntüleme | Olmalı | S2 |
+| F-29 | İletişim kişisi bilgisi | Olsa İyi | S2 |
+| F-30 | İlan bağlantısına gitme | Olmalı | S2 |
 
-### 8.1 Performans
+### EP-07: Gösterge Paneli ve Analiz
 
-| ID | Gereksinim | Hedef | Test |
-|----|-----------|-------|------|
-| PERF-01 | Kanban ilk yükleme | < 2 sn (4G) | Profiler |
-| PERF-02 | Oto doldur toplam süresi | < 4 sn (4G) | Edge Function log |
-| PERF-03 | Arşiv arama yanıt | < 300ms debounce sonrası | Manuel |
-| PERF-04 | Kanban scroll (50 kart) | ≥ 60fps | Xcode/Android profiler |
-| PERF-05 | Cold start | < 3 sn | App Store/Play metrik |
-| PERF-06 | Dashboard metrik hesaplama | < 1 sn | Supabase analyzer |
+| Özellik ID | Özellik Adı | Öncelik | Sprint |
+|-----------|------------|---------|--------|
+| F-31 | Metrik kartları (toplam, bekleyen, mülakat, teklif) | Olmalı | S2 |
+| F-32 | Aşama dağılımı grafiği | Olmalı | S2 |
+| F-33 | Elenme analizi ekranı (aşamalı açılım) | Olmalı | S3 |
+| F-34 | Platform bazlı başarı oranı | Olsa İyi | S3 |
 
-### 8.2 Güvenlik
+### EP-08: Bildirimler
 
-| ID | Gereksinim | Uygulama |
-|----|-----------|---------|
-| SEC-01 | Veri izolasyonu | Supabase Row Level Security (RLS) |
-| SEC-02 | Tüm trafik şifreli | TLS 1.3 |
-| SEC-03 | Servis anahtarı client'a verilmez | Edge Functions environment variable |
-| SEC-04 | Bildirim önizlemesi kişisel bilgi içermez | Expo Notification options |
-| SEC-05 | Brute force koruması | 5 başarısız girişte 15 dk blok |
-| SEC-06 | Scraping whitelist | Sadece izinli domainler |
-
-### 8.3 Erişilebilirlik
-
-| ID | Gereksinim | Standart |
-|----|-----------|---------|
-| ACC-01 | Min dokunma alanı 44x44pt | iOS HIG |
-| ACC-02 | Metin-arka plan kontrast ≥4.5:1 | WCAG 2.1 AA |
-| ACC-03 | VoiceOver / TalkBack desteği | WCAG 2.1 |
-| ACC-04 | Dinamik yazı boyutu uyumu | iOS Dynamic Type |
-| ACC-05 | Renk tek başına bilgi taşımaz | WCAG 1.4.1 |
-
-### 8.4 Güvenilirlik ve Ölçeklenebilirlik
-
-| ID | Gereksinim | Hedef |
-|----|-----------|-------|
-| REL-01 | Crash oranı | < %0.5 oturum/crash |
-| REL-02 | Veri kaybı toleransı | Sıfır — hiçbir başvuru kaydı kaybolmamalı |
-| REL-03 | Supabase uptime | ≥ %99.5 |
-| SCAL-01 | Kullanıcı başına başvuru limiti | Sınırsız |
-| SCAL-02 | Scraper modülerliği | Her platform bağımsız parser |
+| Özellik ID | Özellik Adı | Öncelik | Sprint |
+|-----------|------------|---------|--------|
+| F-35 | Hareketsizlik bildirimi (14 gün) | Olmalı | S3 |
+| F-36 | Bildirim gizliliği (kilit ekranında şirket adı yok) | Olmazsa Olmaz | S3 |
+| F-37 | Bildirim ayarları (açma/kapama, saat aralığı) | Olmalı | S3 |
 
 ---
 
-## 9. Tasarım Gereksinimleri
+## 5. Fonksiyonel Gereksinimler
 
-### 9.1 Tasarım İlkeleri
+### FR-01: Kimlik Doğrulama
 
-**1 — Sade ve Hızlı**  
-Her ekranın tek birincil aksiyonu var. Ekleme 10 sn altında. Gürültü tolere edilmez.
+- Kullanıcı email + şifre veya Google OAuth ile kayıt olabilmeli
+- Oturum 30 gün geçerli, yenileme token'ı ile uzatılabilir
+- Şifre sıfırlama email ile gerçekleşir
+- Hesap silindiğinde tüm kullanıcı verisi 30 gün yumuşak silme sonrası kalıcı olarak silinir
 
-**2 — Gizlilik Öncelikli**  
+### FR-02: Otomatik Bilgi Çekme
+
+> ⚠️ Bu özellik Sprint 1 başlamadan yapılacak teknik uygunluk araştırmasına bağlıdır. Bkz. Teknik Kısıtlamalar #1.
+
+- Kullanıcı Kariyer.net, Youthall veya Anbean linki yapıştırdığında şirket adı, pozisyon ve lokasyon otomatik doldurulur
+- İşlem 4 saniye içinde tamamlanır
+- Başarısız olursa kullanıcı manuel ekleme akışına yönlendirilir, hata gizlenmez
+- LinkedIn için otomatik bilgi çekme yoktur — kullanıcıya net mesaj gösterilir
+
+### FR-03: Başvuru Ekleme ve Düzenleme
+
+- Zorunlu alanlar: şirket adı, pozisyon
+- Opsiyonel alanlar: platform, lokasyon, ilan bağlantısı, başvuru tarihi
+- Başvuru tarihi girilmezse kayıt tarihi atanır
+
+### FR-04: Başvuru Silme
+
+- Kullanıcı başvuruyu silebilir
+- Silme öncesinde "Bu işlem geri alınamaz" onay dialogu gösterilir
+- Silinen başvuru elenme analizinden çıkar
+- Backend'de yumuşak silme olarak saklanır (veri imhası hesap silinince gerçekleşir)
+
+### FR-05: Aşama Yönetimi
+
+**Varsayılan aşamalar (sırayla):**
+1. Başvuruldu
+2. İnsan Kaynakları Görüşmesi
+3. Teknik Mülakat
+4. Yönetici Görüşmesi
+5. Teklif
+6. Elenildi
+
+- Kullanıcı aşama ekleyebilir, yeniden adlandırabilir, silebilir
+- Varsayılan aşamalar silinemez — yalnızca yeniden adlandırılabilir
+- Her aşama geçişi zaman damgasıyla kaydedilir
+
+### FR-06: Görsel Takip Tahtası
+
+- Her aşama ayrı sütunda görüntülenir
+- Sürükle-bırak ile aşama değiştirilebilir
+- Kart üzerinde: şirket adı (kalın), pozisyon, platform renk noktası, göreli tarih ("3 gün önce")
+- Uzun basma ile hızlı menü açılır (aşama değiştir, sil, detaya git)
+
+### FR-07: Arşiv
+
+- Tüm başvurular tarih sırasıyla listelenir
+- Şirket adı ve pozisyona göre anlık arama
+- Platform ve aşamaya göre filtreleme
+
+### FR-08: Elenme Analizi — Aşamalı Açılım
+
+| Başvuru Sayısı | Ekran İçeriği |
+|---------------|---------------|
+| 0-4 | "Henüz örüntü oluşmadı — her başvuru bu ekranı zenginleştirir" |
+| 5-9 | İlk basit metrik: aşama dağılımı gösterilir |
+| 10+ | Tam elenme hunisi aktif: her aşamada geçiş ve elenme oranları |
+
+- Analiz sekmesi her zaman görünürdür — kilitli değildir
+- İçerik başvuru sayısına göre dinamik olarak güncellenir
+
+### FR-09: Bildirimler
+
+- Bir başvurudan 14 gün haber alınmamışsa bildirim gönderilir
+- Günde maksimum 1 bildirim
+- Bildirim saati: 09:00-21:00 arası
+- Kilit ekranı önizlemesinde şirket adı gösterilmez, yalnızca "Applyze — Hatırlatıcın var" görünür
+- Kullanıcı bildirimleri tamamen kapatabilir veya saat aralığını değiştirebilir
+
+### FR-10: Tekrarlayan Başvuru Uyarısı
+
+- Kullanıcı daha önce eklediği bir URL'yi tekrar yapıştırırsa uyarı modalı gösterilir
+- Kullanıcı yine de ekleyebilir — engellenmez, uyarılır
+
+---
+
+## 6. Kullanıcı Hikayeleri ve Kabul Kriterleri
+
+### EP-02: Başvuru Yönetimi
+
+**US-01:** Bir iş arayan olarak, Kariyer.net linki yapıştırarak başvuru ekleyebilmek istiyorum; böylece form doldurmak zorunda kalmam.
+
+*Kabul Kriterleri:*
+- [ ] Geçerli bir Kariyer.net linki yapıştırıldığında şirket adı, pozisyon ve lokasyon otomatik dolar
+- [ ] İşlem 4 saniye içinde tamamlanır
+- [ ] Kullanıcı doldurulmuş alanları kaydetmeden önce düzenleyebilir
+- [ ] Başarısız olursa hata mesajı gösterilir ve manuel forma yönlendirilir
+
+**US-02:** Bir iş arayan olarak, LinkedIn gibi desteklenmeyen platform ilanlarını manuel olarak ekleyebilmek istiyorum.
+
+*Kabul Kriterleri:*
+- [ ] Şirket adı ve pozisyon zorunlu alanlar olarak işaretlidir
+- [ ] Diğer alanlar opsiyoneldir
+- [ ] Form 10 saniyeden kısa sürede doldurulabilir (kullanıcı testi)
+
+**US-03:** Bir iş arayan olarak, yanlışlıkla eklediğim başvuruyu silebilmek istiyorum.
+
+*Kabul Kriterleri:*
+- [ ] Silme seçeneği başvuru detay sayfasında ve uzun basma menüsünde bulunur
+- [ ] Silme öncesinde "Bu işlem geri alınamaz" onay dialogu gösterilir
+- [ ] Silinen başvuru görsel tahtadan ve arşivden anında kaybolur
+- [ ] Silinen başvuru elenme analizini etkiler (hesaplamadan çıkar)
+
+### EP-04: Görsel Takip Tahtası
+
+**US-04:** Bir iş arayan olarak, başvurularımı sürükle-bırak ile aşamalar arasında taşıyabilmek istiyorum.
+
+*Kabul Kriterleri:*
+- [ ] Tüm aşama kombinasyonları arasında sürükle-bırak çalışır
+- [ ] Taşıma sırasında dokunsal geri bildirim verilir
+- [ ] Aşama değişikliği anında kaydedilir
+- [ ] 50 kartla tahta 2 saniyede açılır
+
+### EP-07: Elenme Analizi
+
+**US-05:** Bir iş arayan olarak, hangi mülakat aşamasında elendiğimi görebilmek istiyorum; böylece stratejimi geliştirebilirim.
+
+*Kabul Kriterleri:*
+- [ ] 0-4 başvuruda bilgilendirici boş ekran mesajı gösterilir
+- [ ] 5-9 başvuruda aşama dağılımı görünür
+- [ ] 10+ başvuruda tam elenme hunisi görünür
+- [ ] Silinen başvurular analizden çıkarılır
+
+### EP-08: Bildirimler
+
+**US-06:** Çalışırken iş arayan biri olarak, kilit ekranımda hangi şirkete başvurduğum görünmesini istemiyorum.
+
+*Kabul Kriterleri:*
+- [ ] Kilit ekranı bildirim önizlemesinde yalnızca "Applyze — Hatırlatıcın var" görünür
+- [ ] Şirket adı veya pozisyon bilgisi önizlemede yer almaz
+- [ ] Bu davranış iOS ve Android'de ayrı ayrı test edilir
+
+---
+
+## 7. Fonksiyonel Olmayan Gereksinimler
+
+### Performans
+
+| Gereksinim | Hedef |
+|-----------|-------|
+| Görsel tahta açılış süresi (50 kartla) | < 2 sn |
+| Otomatik bilgi çekme toplam süresi | < 4 sn |
+| Uygulama soğuk başlangıç | < 3 sn |
+| Arşiv araması (100+ başvuruda) | Anlık |
+
+### Güvenilirlik
+
+| Gereksinim | Hedef |
+|-----------|-------|
+| Çökme oranı | < %0.5 |
+| Veri kaybı | Sıfır tolerans |
+| Beta test süresi (çökmesiz) | 7 gün |
+
+### Güvenlik
+
+| Katman | Önlem |
+|--------|-------|
+| Kimlik doğrulama | JWT (1 saat) + yenileme token'ı (30 gün) |
+| Veri izolasyonu | Satır bazlı erişim kontrolü her tabloda |
+| API güvenliği | Servis anahtarı yalnızca Edge Functions'ta |
+| Bildirim gizliliği | Önizleme metni genel, şirket adı yok |
+| Otomatik bilgi çekme | URL beyaz listesi — yalnızca izinli domainler |
+
+### Erişilebilirlik
+
+- Minimum dokunma hedefi 44pt
+- Metin boyutu sistem ayarına uyar
+- Ekran okuyucu (VoiceOver / TalkBack) için semantik etiketler
+
+---
+
+## 8. Tasarım Gereksinimleri
+
+### Tasarım İlkeleri
+
+**1 — Sade ve Hızlı**
+Her ekranın tek birincil aksiyonu var. Başvuru ekleme 10 saniye altında. Gürültü tolere edilmez.
+
+**2 — Gizlilik Öncelikli**
 Bildirimler, ikon ve görünüm nötr. Tek bakışta "iş arama uygulaması" anlaşılmamalı.
 
-**3 — Native Hissettir**  
-iOS'ta iOS dili, Android'de Material 3. Platform konvansiyonları kırılmaz. Haptic feedback.
+**3 — Native Hissettir**
+iOS'ta iOS dili, Android'de Material 3. Platform kuralları kırılmaz. Dokunsal geri bildirim.
 
-**4 — Veriyi Görsel Yap**  
+**4 — Veriyi Görsel Yap**
 Sayılar kadar görsel önemli. Analiz "tek bakışta anlama" sağlamalı.
 
-### 9.2 Renk Sistemi
+### Renk Sistemi
 
 | Renk Amacı | Hex | Kullanım |
 |-----------|-----|---------|
-| Birincil (Teal) | `#0F6E56` | Butonlar, başlıklar, aktif tab |
-| LinkedIn | `#0A66C2` | Platform chip / renk kodu |
-| Kariyer.net | `#FF6600` | Platform chip / renk kodu |
-| Youthall | `#7C3AED` | Platform chip / renk kodu |
-| Anbean | `#059669` | Platform chip / renk kodu |
+| Birincil (Teal) | `#0F6E56` | Butonlar, başlıklar, aktif sekme |
+| LinkedIn | `#0A66C2` | Platform renk noktası |
+| Kariyer.net | `#FF6600` | Platform renk noktası |
+| Youthall | `#7C3AED` | Platform renk noktası |
+| Anbean | `#059669` | Platform renk noktası |
 | Başarı / Teklif | `#059669` | Pozitif metrikler |
 | Uyarı | `#D97706` | Yanıt bekleyenler |
 | Elenildi | `#6B7280` | Elenildi aşaması — nötr gri |
 | Hata | `#DC2626` | Form hataları |
 
-### 9.3 Bileşen Gereksinimleri
+### Bileşen Gereksinimleri
 
 | Bileşen | Gereksinim |
 |--------|-----------|
-| Kanban Kartı | Min 80pt. Şirket (bold), pozisyon, platform dot, göreli tarih. Long press menüsü. |
-| Boş Ekran | Her boş ekran ikon + açıklama + CTA içermeli. |
-| Hata Toast | Kırmızı, alt kısım, 3 sn, swipe ile kapatılabilir. |
-| Loading Skeleton | Kart formunda iskelet animasyonu. Spinner değil. |
-| Bottom Sheet | Aşama değiştirme için. Dismiss edilebilir. |
-| Platform Chip | Platform rengiyle dot + isim. Küçük. |
+| Görsel Tahta Kartı | Min 80pt. Şirket (kalın), pozisyon, platform noktası, göreli tarih. Uzun basma menüsü. |
+| Boş Ekran | Her boş ekran ikon + açıklama + yönlendirici buton içermeli. |
+| Hata Bildirimi | Kırmızı, alt kısım, 3 sn, kaydırarak kapatılabilir. |
+| Yükleme Göstergesi | Kart formunda iskelet animasyonu. Döner simge değil. |
+| Alt Sayfa | Aşama değiştirme için. Kapatılabilir. |
+| Platform Noktası | Platform rengiyle dolu nokta + isim. Küçük. |
 
-### 9.4 Navigasyon Mimarisi
+### Navigasyon Mimarisi
 
 | Seviye | Tip | İçerik |
 |--------|-----|-------|
-| L0 | Tab Bar (5 tab) | Dashboard, Kanban, Arşiv, Analiz, Ayarlar |
-| L1 | Stack Navigator | Her tab kendi stack'i |
-| L2 | Bottom Sheet / Modal | Başvuru ekleme, detay |
-| L3 | Deep Link | `apptrack://application/:id` — bildirim yönlendirmesi |
+| L0 | Sekme Çubuğu (5 sekme) | Gösterge Paneli, Görsel Tahta, Arşiv, Analiz, Ayarlar |
+| L1 | Yığın Gezgini | Her sekme kendi yığınında |
+| L2 | Alt Sayfa / Modal | Başvuru ekleme, detay |
+| L3 | Derin Bağlantı | `apptrack://application/:id` — bildirim yönlendirmesi |
 
 ---
 
-## 10. Veri Gereksinimleri
+## 9. Veri Gereksinimleri
 
-### 10.1 Veri Modeli
+### Veri Modeli
 
 | Tablo | Temel Alanlar | İlişkiler |
 |-------|-------------|---------|
 | `users` | id (UUID PK), email, created_at | 1:N → applications |
-| `applications` | id, user_id FK, company_name, position, platform, source_url, current_stage_id FK, applied_at, updated_at | N:1 → users, N:1 → stages |
-| `stages` | id, user_id FK, name, color, order, is_terminal | N:1 → users, 1:N → applications |
+| `applications` | id, user_id FK, company_name, position, platform, source_url, current_stage_id FK, applied_at, updated_at, deleted_at | N:1 → users, N:1 → stages |
+| `stages` | id, user_id FK, name, color, order, is_terminal, is_default | N:1 → users, 1:N → applications |
 | `stage_history` | id, application_id FK, stage_id FK, changed_at | N:1 → applications |
-| `notes` | id, application_id FK, content (max 2000), created_at | N:1 → applications |
+| `notes` | id, application_id FK, content (maks 2000), created_at | N:1 → applications |
 
-### 10.2 Veri Saklama Politikası
+> `deleted_at` alanı yumuşak silme için kullanılır. Null olmayan kayıtlar tüm sorgulardan ve analizden hariç tutulur.
+
+### Veri Saklama Politikası
 
 | Kural | Detay |
 |-------|-------|
-| Kullanıcı verisi | Hesap aktif iken saklanır. Silme: 30 gün soft delete → hard delete. |
-| Başvuru verisi | Kullanıcı başvuruyu silemez. Hesap silinince silinir. |
+| Kullanıcı verisi | Hesap aktifken saklanır. Silme: 30 gün yumuşak silme → kalıcı silme. |
+| Başvuru verisi | Kullanıcı silebilir (yumuşak silme). Hesap silinince tüm veri kalıcı silinir. |
 | Bildirim logu | Son 90 gün saklanır. |
-| Auth tokenleri | Access token 1 saat. Refresh token 30 gün. Çıkışta geçersiz. |
-| Scraping geçici verisi | Client'a iletildikten sonra log tutulmaz. |
+| Kimlik doğrulama token'ları | Erişim token'ı 1 saat. Yenileme token'ı 30 gün. Çıkışta geçersiz. |
+| Otomatik bilgi çekme geçici verisi | İstemciye iletildikten sonra log tutulmaz. |
 
-### 10.3 Analitik Veri Toplama
+### Analitik Veri Toplama
 
 **Toplanan (anonim, kullanıcı rızasıyla):**
 - Ekran görüntülenme sayısı
 - Özellik kullanım oranları
 - Oturum süresi ve sıklığı
-- Crash logları
+- Çökme logları
 
 **TOPLANMAYAN:**
 - Başvurulan şirket veya pozisyon adları
@@ -524,25 +469,79 @@ Sayılar kadar görsel önemli. Analiz "tek bakışta anlama" sağlamalı.
 
 ---
 
+## 10. Teknik Mimari
+
+### Teknoloji Stack
+
+| Katman | Teknoloji | Gerekçe |
+|--------|-----------|---------|
+| Mobil Framework | Expo (React Native) | iOS + Android tek kod tabanı, hızlı iterasyon |
+| Backend ve Kimlik Doğrulama | Supabase | PostgreSQL, satır bazlı erişim kontrolü, gerçek zamanlı, ücretsiz başlangıç |
+| Otomatik Bilgi Çekme | Supabase Edge Functions (Deno) | Sunucu taraflı web kazıma |
+| Durum Yönetimi | Zustand | Sade, az ortak kod |
+| Gezinme | Expo Router | Dosya tabanlı, derin bağlantı desteği |
+| Bildirimler | Expo Notifications + Supabase cron | Zamanlanmış bildirim |
+| Analitik | Amplitude (ücretsiz başlangıç) | Kullanıcı davranışı takibi |
+| Dağıtım | Expo EAS Build | App Store + Google Play |
+| Versiyon Kontrolü | GitHub | Dal: main + develop + feature |
+
+### Veritabanı Güvenliği
+
+```sql
+-- Satır bazlı erişim kontrolü — her kullanıcı sadece kendi verisine erişir
+CREATE POLICY 'Kullanicilar yalnizca kendi basvirularına erisebilir'
+  ON applications FOR ALL
+  USING (auth.uid() = user_id);
+-- Tüm tablolara aynı politika uygulanır
+```
+
+### Otomatik Bilgi Çekme Akışı
+
+| Adım | İşlem | Hedef Süre |
+|------|--------|------------|
+| 1 | Kullanıcı linki yapıştırır | 0ms |
+| 2 | Domain kontrolü (beyaz liste) | <50ms |
+| 3 | Platform tespiti | <50ms |
+| 4 | Sayfa getirme (sunucu taraflı) | <2000ms |
+| 5 | HTML ayrıştırma, alan çıkarma | <200ms |
+| 6 | JSON olarak istemciye döndür | <100ms |
+| 7 | Form doldurma animasyonu | <200ms |
+
+---
+
 ## 11. Teknik Kısıtlamalar ve Bağımlılıklar
 
-### 11.1 Kısıtlamalar
+### Kısıtlamalar
 
 | Kısıtlama | Etki | Çözüm |
 |----------|------|-------|
-| LinkedIn scraping engeli | LinkedIn oto doldur yok | Manuel ekleme akışı, kullanıcıya net mesaj |
-| Kariyer.net resmi API yok | Scraping gerekiyor | Modüler Edge Function parser |
-| Apple Developer ($99/yıl) | Sprint 1 başında açılmalı | Gün 1 görevi olarak planlandı |
-| App Store inceleme 1-7 gün | Deploy tarihi kesin değil | Sprint 4'te 5 günlük buffer |
-| Supabase ücretsiz tier | 500+ kullanıcıda limit aşılabilir | Pro plan ($25/ay) hazırda |
+| **#1 Otomatik bilgi çekme teknik riski** | Yeşil/sarı/kırmızı senaryoya göre kapsam değişebilir | Sprint 1 öncesi uygunluk araştırması zorunlu. Bkz. aşağıda. |
+| LinkedIn web kazıma engeli | LinkedIn otomatik bilgi çekme yok | Manuel ekleme akışı, kullanıcıya net mesaj |
+| Kariyer.net resmi API yok | Web kazıma gerekiyor | Modüler Edge Function parser |
+| Apple Developer ($99/yıl) | Sprint 1 başında açılmalı | Gün 1 görevi |
+| App Store inceleme 1-7 gün | Dağıtım tarihi kesin değil | Sprint 4'te 5 günlük tampon |
+| Supabase ücretsiz başlangıç | 500+ kullanıcıda limit aşılabilir | Pro plan ($25/ay) hazırda |
 
-### 11.2 Dış Bağımlılıklar
+**Kısıtlama #1 Detayı — Sprint Öncesi Uygunluk Araştırması:**
+
+Sprint 1 kodlama başlamadan yapılacak araştırma:
+- 20-30 farklı Kariyer.net ilanını tarayıcı geliştirici araçlarıyla incele
+- Youthall ve Anbean için aynısını yap
+- Hız sınırı testi yap
+
+| Sonuç | Karar |
+|-------|-------|
+| HTML sunucu taraflı, tutarlı yapı ✅ | Sprint 1'de yaz, başarı hedefi araştırmadan sonra belirlenir |
+| JavaScript ağırlıklı, özel tarayıcı gerekiyor ⚠️ | Puppeteer/Playwright ekle, süre uzar |
+| Engelliyor, güvenilir değil 🔴 | Özellik MVP kapsamından çıkar, manuel ekleme öne çıkar |
+
+### Dış Bağımlılıklar
 
 | Bağımlılık | Tip | Risk |
 |-----------|-----|------|
-| Supabase | Backend/Auth/DB | Orta — servis kesintisi olasılığı |
-| Kariyer.net (scraping) | Veri kaynağı | Yüksek — yapı değişebilir |
-| Youthall (scraping) | Veri kaynağı | Orta |
+| Supabase | Backend/Kimlik Doğrulama/Veritabanı | Orta — servis kesintisi olasılığı |
+| Kariyer.net (web kazıma) | Veri kaynağı | Yüksek — yapı değişebilir |
+| Youthall (web kazıma) | Veri kaynağı | Orta |
 | Expo Notifications | Push bildirim | Düşük |
 | Apple App Store | Dağıtım | Düşük |
 | Google Play | Dağıtım | Düşük |
@@ -551,54 +550,57 @@ Sayılar kadar görsel önemli. Analiz "tek bakışta anlama" sağlamalı.
 
 ## 12. Yayın Kabul Kriterleri
 
-### 12.1 Fonksiyonel Kabul
+### Fonksiyonel Kabul
 
 | # | Kriter | Doğrulama | Sonuç |
 |---|--------|-----------|-------|
-| 1 | Email ile kayıt ve giriş çalışıyor | Manuel test — döngü | ☐ |
+| 1 | Email ile kayıt ve giriş çalışıyor | Manuel test | ☐ |
 | 2 | Google OAuth iOS ve Android'de çalışıyor | Her iki platformda test | ☐ |
-| 3 | Kariyer.net linki oto dolduruyor (5 farklı ilan) | 5 aktif ilan ile test | ☐ |
-| 4 | Youthall linki oto dolduruyor | 5 aktif ilan ile test | ☐ |
+| 3 | Kariyer.net linki otomatik dolduruyor (5 farklı ilan) | 5 aktif ilan ile test | ☐ |
+| 4 | Youthall linki otomatik dolduruyor | 5 aktif ilan ile test | ☐ |
 | 5 | Manuel ilan ekleme çalışıyor | Form doldurma ve kaydetme | ☐ |
-| 6 | Kanban board 10+ başvuruda çalışıyor | 10 başvuruyla test | ☐ |
+| 6 | Görsel tahta 10+ başvuruda çalışıyor | 10 başvuruyla test | ☐ |
 | 7 | Sürükle-bırak tüm sütun kombinasyonlarında çalışıyor | Tüm geçişlerde test | ☐ |
-| 8 | Arşiv arama 10+ başvuruda anlık çalışıyor | Farklı arama terimleriyle | ☐ |
-| 9 | Dashboard metrikleri doğru hesaplanıyor | Bilinen veri setiyle doğrulama | ☐ |
-| 10 | Push bildirim iOS ve Android'e ulaşıyor | TestFlight + internal test | ☐ |
+| 8 | Arşiv araması 10+ başvuruda anlık çalışıyor | Farklı arama terimleriyle | ☐ |
+| 9 | Gösterge paneli metrikleri doğru hesaplanıyor | Bilinen veri setiyle doğrulama | ☐ |
+| 10 | Push bildirim iOS ve Android'e ulaşıyor | TestFlight + dahili test | ☐ |
 | 11 | Bildirim önizlemesi şirket adı içermiyor | Kilitli ekranda kontrol | ☐ |
-| 12 | Duplicate uyarısı tetikleniyor | Aynı URL ile iki kez ekleme | ☐ |
+| 12 | Tekrarlayan başvuru uyarısı tetikleniyor | Aynı URL ile iki kez ekleme | ☐ |
+| 13 | Başvuru silme onay dialogu gösteriliyor | Silme akışı testi | ☐ |
+| 14 | Silinen başvuru elenme analizinden çıkıyor | Analiz ekranı doğrulama | ☐ |
+| 15 | Elenme analizi 0/5/10 eşiklerinde doğru içerik gösteriyor | Her eşikte test | ☐ |
 
-### 12.2 Performans Kabul
+### Performans Kabul
 
 | # | Kriter | Hedef | Sonuç |
 |---|--------|-------|-------|
-| 1 | Kanban 50 kartla açılış | < 2 sn | ☐ |
-| 2 | Oto doldur toplam süresi | < 4 sn | ☐ |
-| 3 | Uygulama cold start | < 3 sn | ☐ |
-| 4 | Beta test 7 gün crash yok | 0 crash | ☐ |
+| 1 | Görsel tahta 50 kartla açılış | < 2 sn | ☐ |
+| 2 | Otomatik bilgi çekme toplam süresi | < 4 sn | ☐ |
+| 3 | Uygulama soğuk başlangıç | < 3 sn | ☐ |
+| 4 | Beta test 7 gün çökmesiz | 0 çökme | ☐ |
 
-### 12.3 UX Kabul
+### Kullanıcı Deneyimi Kabul
 
 | # | Kriter | Test Yöntemi | Sonuç |
 |---|--------|-------------|-------|
-| 1 | Yeni kullanıcı 5 dakikada ilk başvurusunu ekleyebilir | 5 kişiyle usability test | ☐ |
+| 1 | Yeni kullanıcı 5 dakikada ilk başvurusunu ekleyebilir | 5 kişiyle kullanılabilirlik testi | ☐ |
 | 2 | Bildirim önizlemesi 3/3 test kullanıcısı tarafından içerik anlaşılmadan geçildi | Gizlilik testi | ☐ |
-| 3 | Beta kullanıcılarının %50'si 7. günde hâlâ aktif | Cohort takibi | ☐ |
+| 3 | Beta kullanıcılarının %50'si 7. günde hâlâ aktif | Grup takibi | ☐ |
 
 ---
 
 ## 13. Kapsam Dışı Kararlar
 
-| Karar | Gerekçe |
-|-------|---------|
-| LinkedIn oto doldur yok | Aktif scraping engeli — hukuki ve teknik risk. v2'de resmi API araştırılacak. |
-| İlan aggregation yok | Platform API'si yok. Partnership 2.5 ayda kurulamaz. v3'te değerlendirilecek. |
-| Web uygulaması yok | Mobil öncelikli. v2'de React web eklenir. |
-| AI ilan tavsiyesi yok | Veri birikimi yetersiz. v2'de Anthropic API planlanıyor. |
-| Streak sistemi yok | Kullanıcı iş bulunca bırakmak ister. Streak cezalandırır. Kalıcı red. |
-| Sosyal özellikler yok | Gizlilik öncelikli tasarımla çelişir. v3'te opsiyonel. |
-| CV builder yok | Farklı ürün kategorisi. Odak dağıtır. |
-| Offline tam destek yok | Supabase gerçek zamanlı bağlantı gerektirir. v2'de offline-first mimari. |
+| Karar | Gerekçe | Yeniden Değerlendirme |
+|-------|---------|----------------------|
+| LinkedIn otomatik bilgi çekme yok | Aktif engelleme — hukuki ve teknik risk | v2: resmi API araştırma |
+| İlan toplama yok | Platform API'si yok. Ortaklık 2.5 ayda kurulamaz | v3: ortaklık stratejisi |
+| Web uygulaması yok | Mobil öncelikli. Kaynak yetersiz | v2: React web |
+| Yapay zeka ilan tavsiyesi yok | Veri birikimi yetersiz | v2: Anthropic API |
+| Seri sistemi yok | Kullanıcı psikolojisiyle çelişiyor. İş bulunca bırakmak istenir. | Kalıcı red |
+| Sosyal özellikler yok | Gizlilik öncelikli tasarımla çelişiyor | v3: opsiyonel |
+| CV oluşturucu yok | Farklı ürün kategorisi. Odak dağıtır | Bağımsız ürün fırsatı |
+| Tam çevrimdışı destek yok | Supabase gerçek zamanlı bağlantı gerektirir | v2: çevrimdışı-öncelikli mimari |
 
 ---
 
@@ -606,24 +608,24 @@ Sayılar kadar görsel önemli. Analiz "tek bakışta anlama" sağlamalı.
 
 | Terim | Tanım |
 |-------|-------|
-| PRD | Product Requirements Document — tüm ürün gereksinimlerinin tek referans dokümanı |
-| MoSCoW | Must/Should/Could/Won't — önceliklendirme metodolojisi |
-| NFR | Non-Functional Requirements — performans, güvenlik, erişilebilirlik gereksinimleri |
+| PRD | Ürün Gereksinimleri Dokümanı — geliştirici referansı |
+| MoSCoW | Olmazsa Olmaz / Olmalı / Olsa İyi / Olmayacak — önceliklendirme yöntemi |
+| Fonksiyonel Olmayan Gereksinimler | Performans, güvenlik, erişilebilirlik gereksinimleri |
 | Epic | İlgili özellikleri gruplayan üst düzey iş birimi |
-| User Story | Kullanıcı perspektifinden gereksinim: 'Bir X olarak, Y için Z yapmak istiyorum' |
-| Acceptance Criteria | Bir özelliğin tamamlandığını kanıtlayan ölçülebilir koşullar |
-| RLS | Row Level Security — veritabanı satır bazlı erişim kontrolü |
-| Oto Doldur | Link yapıştırılınca ilan bilgilerinin otomatik çekilmesi |
-| Deep Link | Uygulama içinde belirli ekrana doğrudan açılan bağlantı |
-| Cold Start | Uygulamanın bellekten silinmiş halde ilk açılışı |
-| Haptic Feedback | Sürükle-bırak gibi eylemlerde titreşimli dokunsal geri bildirim |
-| Edge Function | Supabase'in sunucusuz (serverless) Deno fonksiyonu |
-| Soft Delete | Veriyi silmek yerine 'silinmiş' olarak işaretleme — geri alınabilir |
-| Funnel | Kullanıcının süreçten geçiş oranını gösteren huni görselleştirmesi |
-| DAU/MAU | Daily/Monthly Active Users oranı |
-| Cohort | Aynı dönemde kaydolan kullanıcı grubu |
-| EAS | Expo Application Services — App Store ve Google Play deploy altyapısı |
+| Kullanıcı Hikayesi | Kullanıcı perspektifinden gereksinim: "Bir X olarak, Y için Z yapmak istiyorum" |
+| Kabul Kriteri | Bir özelliğin tamamlandığını kanıtlayan ölçülebilir koşullar |
+| Satır Bazlı Erişim Kontrolü (RLS) | Veritabanında her kullanıcının yalnızca kendi verisine erişmesini sağlayan güvenlik katmanı |
+| Otomatik Bilgi Çekme | Link yapıştırılınca ilan bilgilerinin otomatik çekilmesi |
+| Derin Bağlantı | Uygulama içinde belirli ekrana doğrudan açılan bağlantı |
+| Soğuk Başlangıç | Uygulamanın bellekten silinmiş halde ilk açılışı |
+| Dokunsal Geri Bildirim | Sürükle-bırak gibi eylemlerde titreşimli geri bildirim |
+| Edge Function | Supabase'in sunucusuz Deno fonksiyonu |
+| Yumuşak Silme | Veriyi silmek yerine "silinmiş" olarak işaretleme — geri alınabilir |
+| Elenme Hunisi | Kullanıcının başvuru sürecindeki aşama geçiş oranlarını gösteren görsel |
+| Günlük/Aylık Aktif Kullanıcı Oranı (DAU/MAU) | Günlük aktif kullanıcı sayısının aylık aktif kullanıcı sayısına oranı |
+| Kullanıcı Grubu (Cohort) | Aynı dönemde kaydolan kullanıcı grubu |
+| EAS | Expo Application Services — App Store ve Google Play dağıtım altyapısı |
 
 ---
 
-*AppTrack PRD — v1.0 | Nisan 2026*
+*Applyze PRD — v2.0 | Nisan 2026*
