@@ -1,6 +1,7 @@
 # Applyze — Geliştirme Planı (plan.md)
 
-**Versiyon:** v1.0
+**Versiyon:** v1.1
+**Son Güncelleme:** 22 Nisan 2026 — Faz 1 kısmen tamamlandı (backend + frontend bağlantısı kuruldu)
 **Kaynak Dokümanlar:** PRD v2.0, MVP Kapsam v2.0, README v1.0
 **Hedef Süre:** 10 Hafta (Sprint 1–4)
 **Platform:** iOS 16+ / Android 10+
@@ -53,10 +54,10 @@
 
 ### 0.3 Repo ve Dal Yapısı
 
-- [ ] GitHub'da `applyze` adında private repo oluştur.
+- [x] GitHub'da `applyze` adında private repo oluştur.
 - [ ] `main`, `develop`, `feature/*` dal stratejisini README'ye yaz.
 - [ ] Dal koruma kuralları: `main` sadece PR ile, `develop`'a merge en az 1 onay.
-- [ ] `.gitignore`: `node_modules`, `.env`, `ios/`, `android/`, `.expo/`, `dist/` ekle.
+- [x] `.gitignore`: `node_modules`, `.env`, `ios/`, `android/`, `.expo/`, `dist/` ekle.
 - [ ] `LICENSE` (MIT) dosyasını ekle.
 
 ---
@@ -65,24 +66,24 @@
 
 ### 1.1 Backend Servisi — Supabase
 
-- [ ] Supabase CLI'yı kur: `brew install supabase/tap/supabase`.
-- [ ] Yerel çalışma dizininde `supabase/` alt klasörünü başlat: `supabase init`.
+- [x] Supabase CLI'yı kur: `brew install supabase/tap/supabase`.
+- [x] Yerel çalışma dizininde `supabase/` alt klasörünü başlat: `supabase init`.
 - [ ] Supabase projesini yerel CLI'ya bağla: `supabase link --project-ref <proje-ref>`.
-- [ ] `supabase/config.toml` dosyasında yerel geliştirme portlarını (54321 API, 54322 DB) doğrula.
+- [x] `supabase/config.toml` dosyasında yerel geliştirme portlarını (54321 API, 54322 DB) doğrula.
 - [ ] Supabase Auth panelinde Google sağlayıcısını aç; Client ID ve Secret'ı Google Cloud'dan al.
 - [ ] Supabase Auth panelinde Email sağlayıcısını aç; e-posta doğrulamasını açık bırak.
 - [ ] Supabase Auth panelinde şifre sıfırlama e-posta şablonunu Türkçeye çevir.
 - [ ] JWT süresini 1 saat, refresh token süresini 30 gün olarak ayarla (Auth > Settings).
-- [ ] `supabase/migrations/` klasörünü oluştur, boş bir `0000_init.sql` dosyası yerleştir (Faz 2'de doldurulacak).
+- [x] `supabase/migrations/` klasörünü oluştur, boş bir `0000_init.sql` dosyası yerleştir (Faz 2'de doldurulacak).
 
 ### 1.2 Frontend Servisi — Expo
 
-- [ ] Expo projesini Typescript template ile başlat: `npx create-expo-app@latest applyze --template expo-template-blank-typescript`.
-- [ ] Expo Router'a geçiş yap: `npx expo install expo-router react-native-safe-area-context react-native-screens`.
-- [ ] `package.json` → `main` alanını `"expo-router/entry"` yap.
+- [x] Expo projesini Typescript template ile başlat: `npx create-expo-app@latest applyze --template expo-template-blank-typescript`.
+- [x] Expo Router'a geçiş yap: `npx expo install expo-router react-native-safe-area-context react-native-screens`.
+- [x] `package.json` → `main` alanını `"expo-router/entry"` yap.
 - [ ] `app.json` → `scheme: "applyze"` ayarla (derin bağlantı için).
 - [ ] Temel bağımlılıkları kur:
-  - [ ] `npx expo install @supabase/supabase-js react-native-url-polyfill`
+  - [x] `npx expo install @supabase/supabase-js react-native-url-polyfill`
   - [ ] `npm install zustand`
   - [ ] `npx expo install expo-notifications expo-device expo-constants`
   - [ ] `npx expo install expo-secure-store` (oturum saklama için)
@@ -92,13 +93,15 @@
 - [ ] Klasör yapısını kur (README'deki şablona göre):
   - [ ] `app/(auth)/`, `app/(tabs)/`, `app/application/`
   - [ ] `components/`, `store/`, `lib/`, `assets/`
-- [ ] `lib/supabase.ts` oluştur: Supabase client'ı SecureStore ile başlat.
+- [x] `lib/supabase.ts` oluştur: Supabase client'ı SecureStore ile başlat.
 - [ ] `.env.example` dosyasını oluştur: `EXPO_PUBLIC_SUPABASE_URL`, `EXPO_PUBLIC_SUPABASE_ANON_KEY`, `EXPO_PUBLIC_AMPLITUDE_API_KEY`.
-- [ ] `.env` dosyasını ilgili değerlerle doldur (commit edilmeyecek).
+- [x] `.env` dosyasını ilgili değerlerle doldur (commit edilmeyecek).
 - [ ] EAS yapılandırması: `eas build:configure` çalıştır, `eas.json` üret.
 - [ ] iOS bundle identifier: `com.applyze.app`. Android package: `com.applyze.app`.
 - [ ] Uygulama ikonu (1024x1024), splash screen ve adaptive icon şablonlarını `assets/`'e yerleştir (placeholder olabilir).
 - [ ] `npx expo start` ile hem iOS simulator hem de Android emulator'da boş ekranın açıldığını doğrula.
+
+> **Not (22 Nis 2026):** `npx expo start --web` ile web tarayıcıda açıldı ve `hello` Edge Function'a istek atıp `"Merhaba Başak — backend ayakta."` cevabını başarıyla aldı. iOS simulator ve Android emulator testleri henüz yapılmadı.
 
 ### 1.3 CI ve Kalite Altyapısı
 
@@ -155,7 +158,7 @@
 
 ### 2.4 Edge Function API Sözleşmesi
 
-> Edge Functions `supabase/functions/<name>/index.ts` altında yazılır.
+> Edge Functions `supabase/functions/<n>/index.ts` altında yazılır.
 
 - [ ] `scrape-url` Edge Function iskeletini oluştur:
   - **Input:** `{ url: string }` + Bearer token.
@@ -617,4 +620,4 @@
 
 ---
 
-*Applyze plan.md — v1.0 | PRD v2.0 ve MVP Kapsam v2.0 temel alınarak hazırlandı.*
+*Applyze plan.md — v1.1 | PRD v2.0 ve MVP Kapsam v2.0 temel alınarak hazırlandı.*
