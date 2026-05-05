@@ -1,50 +1,69 @@
-# Welcome to your Expo app 👋
+# Applyze — Frontend v3
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Türk iş arayanlar için kariyer pusulası — başvurularını organize et, örüntüleri gör, kendi yönünü bul.
 
-## Get started
+## Hızlı başlangıç
 
-1. Install dependencies
-
-   ```bash
-   npm install
-   ```
-
-2. Start the app
-
-   ```bash
-   npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
+Detaylı kurulum için **`KURULUM.md`** dosyasına bak.
 
 ```bash
-npm run reset-project
+npm install
+npx expo start --clear
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+## Stack
 
-## Learn more
+- **Expo SDK 52** + **Expo Router v4** (file-based routing)
+- **React Native 0.76** (New Architecture)
+- **NativeWind v4** (Tailwind for React Native)
+- **TypeScript** (strict)
+- **Inter Variable** + **Menlo** (typography)
+- **react-native-svg** (compass + icons)
 
-To learn more about developing your project with Expo, look at the following resources:
+## Ekranlar (toplam 17)
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+```
+app/
+├── index.tsx                      # Splash (1.8s)
+├── (auth)/login.tsx               # Apple + Email login
+├── (onboarding)/
+│   ├── index.tsx                  # 1: "Sadece bir takipçi değil. Bir pusula."
+│   ├── two.tsx                    # 2: "Hangi aşamada elendiğini gör."
+│   └── three.tsx                  # 3: "Bildirimlerin sessiz."
+├── (tabs)/
+│   ├── _layout.tsx                # Native Expo Tabs
+│   ├── dashboard.tsx              # Özet — 4 metrik + huni + bar + recent
+│   ├── index.tsx                  # Liste — 9 başvuru, 5 filtre, arama
+│   └── profile.tsx                # Profil — kimlik + ayarlar
+├── application/
+│   ├── [id].tsx                   # Detay — timeline + notlar + aksiyon bar
+│   ├── new.tsx                    # Yeni başvuru — modal form
+│   └── edit/[id].tsx              # Düzenle — danger zone
+├── milestone.tsx                  # "İlk açılan kapı." (Yüz B)
+└── settings/
+    ├── notifications.tsx          # Bildirim ayarları
+    └── stages.tsx                 # Aşama yönetimi
+```
 
-## Join the community
+## Renk paleti
 
-Join our community of developers creating universal apps.
+**Yüz A (Krem):** `#FAF8F4` `#F4F1EB` `#EBE7DF` `#D9D3C8`
+**Yüz B (Karanlık):** `#1A2622` `#243530` `#1F1B16`
+**Aksan (Sage):** `#3D5A47` `#7A9270` `#B8C9BD` `#E2E8D6`
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+## Brand prensipleri
+
+- **Pusula sembolü:** 4 varyant (filled, outline, glow-light, glow-dark)
+- **Editorial italic** başlıklar (`Inter_300Light_Italic`)
+- **Menlo** sayısal/tarih bilgisi için
+- **Sessiz bildirimler:** kilit ekranında şirket adı görünmez
+- **Streak yok:** sürekli kullanım dayatılmaz, kariyer huzursuzluğu körüklenmez
+
+## Mock data
+
+`lib/mockData.ts` — 9 örnek başvuru, in-memory store, subscribe pattern.
+Backend'e geçildiğinde Supabase API'sıyla aynı arayüze sahip kalır.
+
+## Lisans
+
+MIT

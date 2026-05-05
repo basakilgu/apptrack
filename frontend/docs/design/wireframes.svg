@@ -1,0 +1,614 @@
+<svg width="1280" height="1860" viewBox="0 0 1280 1860" xmlns="http://www.w3.org/2000/svg" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', sans-serif">
+
+  <defs>
+    <linearGradient id="appIconBgW" x1="50%" y1="0%" x2="50%" y2="100%">
+      <stop offset="0%" stop-color="#2D4438"/>
+      <stop offset="100%" stop-color="#1A2622"/>
+    </linearGradient>
+    <pattern id="darkDotsW" x="0" y="0" width="14" height="14" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="0.7" fill="#FAF8F4" opacity="0.06"/>
+    </pattern>
+    <pattern id="forestDotsW" x="0" y="0" width="16" height="16" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="0.7" fill="#FAF8F4" opacity="0.05"/>
+    </pattern>
+    <radialGradient id="milestoneGlowW" cx="50%" cy="40%" r="55%">
+      <stop offset="0%" stop-color="#B8C9BD" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#B8C9BD" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="cardShadowW" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="2"/>
+      <feOffset dx="0" dy="1.5"/>
+      <feComponentTransfer><feFuncA type="linear" slope="0.05"/></feComponentTransfer>
+      <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <rect width="1280" height="1860" fill="#FAFAF8"/>
+
+  <text x="50" y="58" font-size="24" font-weight="600" fill="#1F1B16">Applyze · Annotated Wireframes</text>
+  <text x="50" y="82" font-size="13" font-weight="400" fill="#5C5650">Component anatomisi · Tasarım spec dokümantasyonu</text>
+  <line x1="50" y1="104" x2="1230" y2="104" stroke="#EBE7DF" stroke-width="0.5"/>
+
+  <g transform="translate(50, 140)">
+    <text x="0" y="0" font-size="11" font-weight="600" fill="#3D5A47" letter-spacing="1">EKRAN 01 · YÜZ A</text>
+    <text x="0" y="24" font-size="18" font-weight="600" fill="#1F1B16">Application List</text>
+    <text x="0" y="44" font-size="12" font-weight="400" fill="#5C5650">Tüm başvurular, filtre chip'leri, durum rozetleri ve bottom navigation</text>
+
+    <g transform="translate(0, 70)">
+      <rect width="240" height="520" rx="32" fill="#FAF8F4" stroke="#EBE7DF" stroke-width="0.5"/>
+      <text x="14" y="22" font-size="9" font-weight="600" fill="#1F1B16">9:41</text>
+      <text x="14" y="56" font-size="16" font-weight="600" fill="#1F1B16">Başvurularım</text>
+      <text x="14" y="72" font-size="10" font-weight="400" fill="#8A8278">23 toplam · 4 mülakat</text>
+      <rect x="208" y="42" width="22" height="22" rx="6" fill="#F4F1EB"/>
+      <line x1="219" y1="48" x2="219" y2="58" stroke="#1F1B16" stroke-width="1.2"/>
+      <line x1="214" y1="53" x2="224" y2="53" stroke="#1F1B16" stroke-width="1.2"/>
+
+      <g transform="translate(14, 90)">
+        <rect width="44" height="22" rx="11" fill="#3D5A47"/>
+        <text x="22" y="14" font-size="8" font-weight="500" fill="#FAF8F4" text-anchor="middle">Tümü 23</text>
+        <rect x="50" width="38" height="22" rx="11" fill="#F4F1EB"/>
+        <text x="69" y="14" font-size="8" font-weight="500" fill="#5C5650" text-anchor="middle">Aktif 15</text>
+        <rect x="94" width="46" height="22" rx="11" fill="#F4F1EB"/>
+        <text x="117" y="14" font-size="8" font-weight="500" fill="#5C5650" text-anchor="middle">Mülakat 4</text>
+        <rect x="146" width="42" height="22" rx="11" fill="#F4F1EB"/>
+        <text x="167" y="14" font-size="8" font-weight="500" fill="#5C5650" text-anchor="middle">Arşiv 4</text>
+      </g>
+
+      <g transform="translate(14, 128)" filter="url(#cardShadowW)">
+        <rect width="212" height="58" rx="10" fill="#FFFFFF" stroke="#EBE7DF" stroke-width="0.5"/>
+        <text x="12" y="20" font-size="11" font-weight="600" fill="#1F1B16">Süreç Tasarım Uzmanı</text>
+        <text x="12" y="34" font-size="9" font-weight="400" fill="#5C5650">Trendyol</text>
+        <rect x="152" y="11" width="50" height="17" rx="4" fill="#EDE0CE"/>
+        <text x="177" y="23" font-size="8" font-weight="500" fill="#5E4828" text-anchor="middle">Mülakat</text>
+        <text x="12" y="48" font-size="8" font-family="Menlo, monospace" fill="#8A8278">12 Nis · 3. aşama · 2 not</text>
+      </g>
+
+      <g transform="translate(14, 196)" filter="url(#cardShadowW)">
+        <rect width="212" height="58" rx="10" fill="#FFFFFF" stroke="#EBE7DF" stroke-width="0.5"/>
+        <text x="12" y="20" font-size="11" font-weight="600" fill="#1F1B16">İş Analisti</text>
+        <text x="12" y="34" font-size="9" font-weight="400" fill="#5C5650">Garanti BBVA</text>
+        <rect x="152" y="11" width="50" height="17" rx="4" fill="#DEE6EE"/>
+        <text x="177" y="23" font-size="8" font-weight="500" fill="#2F4358" text-anchor="middle">Başvuru</text>
+        <text x="12" y="48" font-size="8" font-family="Menlo, monospace" fill="#8A8278">10 Nis · 1. aşama</text>
+      </g>
+
+      <g transform="translate(14, 264)" filter="url(#cardShadowW)">
+        <rect width="212" height="58" rx="10" fill="#FFFFFF" stroke="#EBE7DF" stroke-width="0.5"/>
+        <text x="12" y="20" font-size="11" font-weight="600" fill="#1F1B16">Operasyon Uzmanı</text>
+        <text x="12" y="34" font-size="9" font-weight="400" fill="#5C5650">Getir</text>
+        <rect x="158" y="11" width="44" height="17" rx="4" fill="#E8D8D8"/>
+        <text x="180" y="23" font-size="8" font-weight="500" fill="#6B4444" text-anchor="middle">Elendi</text>
+        <text x="12" y="48" font-size="8" font-family="Menlo, monospace" fill="#8A8278">8 Nis · 2. aşamada elendi</text>
+      </g>
+
+      <g transform="translate(14, 332)" filter="url(#cardShadowW)">
+        <rect width="212" height="58" rx="10" fill="#FFFFFF" stroke="#EBE7DF" stroke-width="0.5"/>
+        <text x="12" y="20" font-size="11" font-weight="600" fill="#1F1B16">Ürün Yöneticisi</text>
+        <text x="12" y="34" font-size="9" font-weight="400" fill="#5C5650">Hepsiburada</text>
+        <rect x="148" y="11" width="54" height="17" rx="4" fill="#E2E8D6"/>
+        <text x="175" y="23" font-size="8" font-weight="500" fill="#4A5638" text-anchor="middle">Screening</text>
+        <text x="12" y="48" font-size="8" font-family="Menlo, monospace" fill="#8A8278">5 Nis · 1. aşama · 1 not</text>
+      </g>
+
+      <line x1="0" y1="470" x2="240" y2="470" stroke="#EBE7DF" stroke-width="0.5"/>
+      <g transform="translate(36, 484)">
+        <circle cx="8" cy="8" r="2.5" fill="none" stroke="#8A8278" stroke-width="0.9"/>
+        <text x="8" y="26" font-size="8" font-weight="500" fill="#8A8278" text-anchor="middle">Özet</text>
+      </g>
+      <g transform="translate(112, 484)">
+        <rect x="4" y="4" width="8" height="8" fill="none" stroke="#3D5A47" stroke-width="1.1"/>
+        <text x="8" y="26" font-size="8" font-weight="600" fill="#3D5A47" text-anchor="middle">Liste</text>
+      </g>
+      <g transform="translate(188, 484)">
+        <circle cx="8" cy="8" r="2.5" fill="none" stroke="#8A8278" stroke-width="0.9"/>
+        <text x="8" y="26" font-size="8" font-weight="500" fill="#8A8278" text-anchor="middle">Profil</text>
+      </g>
+
+      <g transform="translate(0, 0)">
+        <line x1="14" y1="22" x2="-30" y2="22" stroke="#3D5A47" stroke-width="0.5" stroke-dasharray="2 2"/>
+        <circle cx="-32" cy="22" r="9" fill="#3D5A47"/>
+        <text x="-32" y="25" font-size="9" font-weight="600" fill="#FAF8F4" text-anchor="middle">1</text>
+      </g>
+      <g transform="translate(0, 0)">
+        <line x1="14" y1="56" x2="-30" y2="56" stroke="#3D5A47" stroke-width="0.5" stroke-dasharray="2 2"/>
+        <circle cx="-32" cy="56" r="9" fill="#3D5A47"/>
+        <text x="-32" y="59" font-size="9" font-weight="600" fill="#FAF8F4" text-anchor="middle">2</text>
+      </g>
+      <g transform="translate(0, 0)">
+        <line x1="220" y1="52" x2="270" y2="52" stroke="#3D5A47" stroke-width="0.5" stroke-dasharray="2 2"/>
+        <circle cx="272" cy="52" r="9" fill="#3D5A47"/>
+        <text x="272" y="55" font-size="9" font-weight="600" fill="#FAF8F4" text-anchor="middle">3</text>
+      </g>
+      <g transform="translate(0, 0)">
+        <line x1="36" y1="100" x2="36" y2="-30" stroke="#3D5A47" stroke-width="0.5" stroke-dasharray="2 2"/>
+        <circle cx="36" cy="-32" r="9" fill="#3D5A47"/>
+        <text x="36" y="-29" font-size="9" font-weight="600" fill="#FAF8F4" text-anchor="middle">4</text>
+      </g>
+      <g transform="translate(0, 0)">
+        <line x1="120" y1="158" x2="270" y2="158" stroke="#3D5A47" stroke-width="0.5" stroke-dasharray="2 2"/>
+        <circle cx="272" cy="158" r="9" fill="#3D5A47"/>
+        <text x="272" y="161" font-size="9" font-weight="600" fill="#FAF8F4" text-anchor="middle">5</text>
+      </g>
+      <g transform="translate(0, 0)">
+        <line x1="180" y1="207" x2="270" y2="207" stroke="#3D5A47" stroke-width="0.5" stroke-dasharray="2 2"/>
+        <circle cx="272" cy="207" r="9" fill="#3D5A47"/>
+        <text x="272" y="210" font-size="9" font-weight="600" fill="#FAF8F4" text-anchor="middle">6</text>
+      </g>
+      <g transform="translate(0, 0)">
+        <line x1="115" y1="244" x2="270" y2="244" stroke="#3D5A47" stroke-width="0.5" stroke-dasharray="2 2"/>
+        <circle cx="272" cy="244" r="9" fill="#3D5A47"/>
+        <text x="272" y="247" font-size="9" font-weight="600" fill="#FAF8F4" text-anchor="middle">7</text>
+      </g>
+      <g transform="translate(0, 0)">
+        <line x1="120" y1="488" x2="270" y2="488" stroke="#3D5A47" stroke-width="0.5" stroke-dasharray="2 2"/>
+        <circle cx="272" cy="488" r="9" fill="#3D5A47"/>
+        <text x="272" y="491" font-size="9" font-weight="600" fill="#FAF8F4" text-anchor="middle">8</text>
+      </g>
+    </g>
+
+    <g transform="translate(310, 70)">
+      <text x="0" y="14" font-size="11" font-weight="600" fill="#1F1B16">Component anatomy</text>
+      <line x1="0" y1="22" x2="240" y2="22" stroke="#EBE7DF" stroke-width="0.5"/>
+
+      <g transform="translate(0, 36)">
+        <circle cx="9" cy="9" r="9" fill="#3D5A47"/>
+        <text x="9" y="12" font-size="9" font-weight="600" fill="#FAF8F4" text-anchor="middle">1</text>
+        <text x="26" y="8" font-size="11" font-weight="600" fill="#1F1B16">Status bar</text>
+        <text x="26" y="22" font-size="10" font-weight="400" fill="#5C5650">iOS sistem · saat ve göstergeler</text>
+      </g>
+      <g transform="translate(0, 78)">
+        <circle cx="9" cy="9" r="9" fill="#3D5A47"/>
+        <text x="9" y="12" font-size="9" font-weight="600" fill="#FAF8F4" text-anchor="middle">2</text>
+        <text x="26" y="8" font-size="11" font-weight="600" fill="#1F1B16">Header</text>
+        <text x="26" y="22" font-size="10" font-weight="400" fill="#5C5650">Inter 600 22px · alt meta info</text>
+      </g>
+      <g transform="translate(0, 120)">
+        <circle cx="9" cy="9" r="9" fill="#3D5A47"/>
+        <text x="9" y="12" font-size="9" font-weight="600" fill="#FAF8F4" text-anchor="middle">3</text>
+        <text x="26" y="8" font-size="11" font-weight="600" fill="#1F1B16">Add button</text>
+        <text x="26" y="22" font-size="10" font-weight="400" fill="#5C5650">28x28 squircle · F4F1EB bg</text>
+      </g>
+      <g transform="translate(0, 162)">
+        <circle cx="9" cy="9" r="9" fill="#3D5A47"/>
+        <text x="9" y="12" font-size="9" font-weight="600" fill="#FAF8F4" text-anchor="middle">4</text>
+        <text x="26" y="8" font-size="11" font-weight="600" fill="#1F1B16">Active filter chip</text>
+        <text x="26" y="22" font-size="10" font-weight="400" fill="#5C5650">Accent 3D5A47 · krem text</text>
+      </g>
+      <g transform="translate(0, 204)">
+        <circle cx="9" cy="9" r="9" fill="#3D5A47"/>
+        <text x="9" y="12" font-size="9" font-weight="600" fill="#FAF8F4" text-anchor="middle">5</text>
+        <text x="26" y="8" font-size="11" font-weight="600" fill="#1F1B16">Status badge</text>
+        <text x="26" y="22" font-size="10" font-weight="400" fill="#5C5650">Pozisyon başına muted ton</text>
+      </g>
+      <g transform="translate(0, 246)">
+        <circle cx="9" cy="9" r="9" fill="#3D5A47"/>
+        <text x="9" y="12" font-size="9" font-weight="600" fill="#FAF8F4" text-anchor="middle">6</text>
+        <text x="26" y="8" font-size="11" font-weight="600" fill="#1F1B16">Application card</text>
+        <text x="26" y="22" font-size="10" font-weight="400" fill="#5C5650">white bg · 0.5px border · radius 10</text>
+      </g>
+      <g transform="translate(0, 288)">
+        <circle cx="9" cy="9" r="9" fill="#3D5A47"/>
+        <text x="9" y="12" font-size="9" font-weight="600" fill="#FAF8F4" text-anchor="middle">7</text>
+        <text x="26" y="8" font-size="11" font-weight="600" fill="#1F1B16">Date + stage</text>
+        <text x="26" y="22" font-size="10" font-weight="400" fill="#5C5650">Menlo monospace · 8A8278</text>
+      </g>
+      <g transform="translate(0, 330)">
+        <circle cx="9" cy="9" r="9" fill="#3D5A47"/>
+        <text x="9" y="12" font-size="9" font-weight="600" fill="#FAF8F4" text-anchor="middle">8</text>
+        <text x="26" y="8" font-size="11" font-weight="600" fill="#1F1B16">Bottom nav (active)</text>
+        <text x="26" y="22" font-size="10" font-weight="400" fill="#5C5650">3 sekme · aktif accent renk</text>
+      </g>
+    </g>
+  </g>
+
+  <g transform="translate(660, 140)">
+    <text x="0" y="0" font-size="11" font-weight="600" fill="#3D5A47" letter-spacing="1">EKRAN 02 · YÜZ A</text>
+    <text x="0" y="24" font-size="18" font-weight="600" fill="#1F1B16">Application Detail</text>
+    <text x="0" y="44" font-size="12" font-weight="400" fill="#5C5650">Başvuru başlığı, süreç timeline'ı, notlar ve aksiyon butonları</text>
+
+    <g transform="translate(0, 70)">
+      <rect width="240" height="520" rx="32" fill="#FAF8F4" stroke="#EBE7DF" stroke-width="0.5"/>
+      <text x="14" y="22" font-size="9" font-weight="600" fill="#1F1B16">9:41</text>
+
+      <path d="M 19 44 L 13 50 L 19 56" fill="none" stroke="#1F1B16" stroke-width="1.3" stroke-linecap="round"/>
+      <g transform="translate(214, 50)">
+        <circle cx="0" cy="0" r="1.2" fill="#1F1B16"/>
+        <circle cx="6" cy="0" r="1.2" fill="#1F1B16"/>
+        <circle cx="12" cy="0" r="1.2" fill="#1F1B16"/>
+      </g>
+
+      <text x="14" y="86" font-size="16" font-weight="600" fill="#1F1B16">Süreç Tasarım</text>
+      <text x="14" y="106" font-size="16" font-weight="600" fill="#1F1B16">Uzmanı</text>
+      <text x="14" y="124" font-size="11" font-weight="400" fill="#5C5650">Trendyol · İstanbul</text>
+
+      <rect x="14" y="138" width="58" height="20" rx="5" fill="#EDE0CE"/>
+      <text x="43" y="151" font-size="9" font-weight="500" fill="#5E4828" text-anchor="middle">Mülakat</text>
+      <text x="80" y="152" font-size="9" font-family="Menlo, monospace" fill="#8A8278">12 Nisan 2026</text>
+
+      <text x="14" y="190" font-size="11" font-weight="600" fill="#1F1B16">Süreç</text>
+
+      <g transform="translate(20, 200)">
+        <line x1="10" y1="10" x2="200" y2="10" stroke="#EBE7DF" stroke-width="0.8"/>
+        <line x1="10" y1="10" x2="110" y2="10" stroke="#3D5A47" stroke-width="1.2"/>
+
+        <circle cx="10" cy="10" r="6" fill="#3D5A47"/>
+        <path d="M 7 10 L 9 12 L 13 8" fill="none" stroke="#FAF8F4" stroke-width="1.1" stroke-linecap="round"/>
+        <circle cx="60" cy="10" r="6" fill="#3D5A47"/>
+        <path d="M 57 10 L 59 12 L 63 8" fill="none" stroke="#FAF8F4" stroke-width="1.1" stroke-linecap="round"/>
+        <circle cx="110" cy="10" r="8" fill="#FAF8F4" stroke="#3D5A47" stroke-width="1.6"/>
+        <circle cx="110" cy="10" r="3" fill="#3D5A47"/>
+        <circle cx="160" cy="10" r="5" fill="#FAF8F4" stroke="#D9D3C8" stroke-width="0.8"/>
+
+        <text x="10" y="32" font-size="9" font-weight="500" fill="#5C5650" text-anchor="middle">Başvuru</text>
+        <text x="60" y="32" font-size="9" font-weight="500" fill="#5C5650" text-anchor="middle">İK</text>
+        <text x="110" y="32" font-size="9" font-weight="600" fill="#3D5A47" text-anchor="middle">Mülakat</text>
+        <text x="160" y="32" font-size="9" font-weight="500" fill="#8A8278" text-anchor="middle">Teklif</text>
+      </g>
+
+      <text x="14" y="278" font-size="11" font-weight="600" fill="#1F1B16">Notlar</text>
+
+      <g transform="translate(14, 288)" filter="url(#cardShadowW)">
+        <rect width="212" height="116" rx="9" fill="#FFFFFF" stroke="#EBE7DF" stroke-width="0.5"/>
+        <text x="12" y="20" font-size="9" font-weight="500" fill="#8A8278">14 Nis</text>
+        <text x="12" y="36" font-size="10" font-weight="400" fill="#1F1B16">İK görüşmesi pozitif geçti.</text>
+        <text x="12" y="50" font-size="10" font-weight="400" fill="#1F1B16">Teknik mülakat 18 Nisan'a</text>
+        <text x="12" y="64" font-size="10" font-weight="400" fill="#1F1B16">randevu verildi.</text>
+        <line x1="12" y1="76" x2="200" y2="76" stroke="#EBE7DF" stroke-width="0.5"/>
+        <text x="12" y="92" font-size="9" font-weight="500" fill="#8A8278">12 Nis</text>
+        <text x="12" y="106" font-size="10" font-weight="400" fill="#1F1B16">Süreç başladı, başvurum alındı.</text>
+      </g>
+
+      <rect x="14" y="430" width="128" height="36" rx="9" fill="#3D5A47"/>
+      <text x="78" y="453" font-size="11" font-weight="500" fill="#FAF8F4" text-anchor="middle">Aşamayı güncelle</text>
+      <rect x="150" y="430" width="76" height="36" rx="9" fill="none" stroke="#D9D3C8" stroke-width="0.8"/>
+      <text x="188" y="453" font-size="11" font-weight="500" fill="#1F1B16" text-anchor="middle">Not ekle</text>
+
+      <g transform="translate(0, 0)">
+        <line x1="20" y1="50" x2="-30" y2="50" stroke="#3D5A47" stroke-width="0.5" stroke-dasharray="2 2"/>
+        <circle cx="-32" cy="50" r="9" fill="#3D5A47"/>
+        <text x="-32" y="53" font-size="9" font-weight="600" fill="#FAF8F4" text-anchor="middle">1</text>
+      </g>
+      <g transform="translate(0, 0)">
+        <line x1="14" y1="96" x2="-30" y2="96" stroke="#3D5A47" stroke-width="0.5" stroke-dasharray="2 2"/>
+        <circle cx="-32" cy="96" r="9" fill="#3D5A47"/>
+        <text x="-32" y="99" font-size="9" font-weight="600" fill="#FAF8F4" text-anchor="middle">2</text>
+      </g>
+      <g transform="translate(0, 0)">
+        <line x1="80" y1="124" x2="-30" y2="124" stroke="#3D5A47" stroke-width="0.5" stroke-dasharray="2 2"/>
+        <circle cx="-32" cy="124" r="9" fill="#3D5A47"/>
+        <text x="-32" y="127" font-size="9" font-weight="600" fill="#FAF8F4" text-anchor="middle">3</text>
+      </g>
+      <g transform="translate(0, 0)">
+        <line x1="78" y1="148" x2="270" y2="148" stroke="#3D5A47" stroke-width="0.5" stroke-dasharray="2 2"/>
+        <circle cx="272" cy="148" r="9" fill="#3D5A47"/>
+        <text x="272" y="151" font-size="9" font-weight="600" fill="#FAF8F4" text-anchor="middle">4</text>
+      </g>
+      <g transform="translate(0, 0)">
+        <line x1="135" y1="220" x2="270" y2="220" stroke="#3D5A47" stroke-width="0.5" stroke-dasharray="2 2"/>
+        <circle cx="272" cy="220" r="9" fill="#3D5A47"/>
+        <text x="272" y="223" font-size="9" font-weight="600" fill="#FAF8F4" text-anchor="middle">5</text>
+      </g>
+      <g transform="translate(0, 0)">
+        <line x1="135" y1="350" x2="270" y2="350" stroke="#3D5A47" stroke-width="0.5" stroke-dasharray="2 2"/>
+        <circle cx="272" cy="350" r="9" fill="#3D5A47"/>
+        <text x="272" y="353" font-size="9" font-weight="600" fill="#FAF8F4" text-anchor="middle">6</text>
+      </g>
+      <g transform="translate(0, 0)">
+        <line x1="78" y1="448" x2="-30" y2="448" stroke="#3D5A47" stroke-width="0.5" stroke-dasharray="2 2"/>
+        <circle cx="-32" cy="448" r="9" fill="#3D5A47"/>
+        <text x="-32" y="451" font-size="9" font-weight="600" fill="#FAF8F4" text-anchor="middle">7</text>
+      </g>
+      <g transform="translate(0, 0)">
+        <line x1="188" y1="448" x2="270" y2="448" stroke="#3D5A47" stroke-width="0.5" stroke-dasharray="2 2"/>
+        <circle cx="272" cy="448" r="9" fill="#3D5A47"/>
+        <text x="272" y="451" font-size="9" font-weight="600" fill="#FAF8F4" text-anchor="middle">8</text>
+      </g>
+    </g>
+
+    <g transform="translate(310, 70)">
+      <text x="0" y="14" font-size="11" font-weight="600" fill="#1F1B16">Component anatomy</text>
+      <line x1="0" y1="22" x2="240" y2="22" stroke="#EBE7DF" stroke-width="0.5"/>
+
+      <g transform="translate(0, 36)">
+        <circle cx="9" cy="9" r="9" fill="#3D5A47"/>
+        <text x="9" y="12" font-size="9" font-weight="600" fill="#FAF8F4" text-anchor="middle">1</text>
+        <text x="26" y="8" font-size="11" font-weight="600" fill="#1F1B16">Back button</text>
+        <text x="26" y="22" font-size="10" font-weight="400" fill="#5C5650">Sol üst · 24px touch area</text>
+      </g>
+      <g transform="translate(0, 78)">
+        <circle cx="9" cy="9" r="9" fill="#3D5A47"/>
+        <text x="9" y="12" font-size="9" font-weight="600" fill="#FAF8F4" text-anchor="middle">2</text>
+        <text x="26" y="8" font-size="11" font-weight="600" fill="#1F1B16">Title (heading-1)</text>
+        <text x="26" y="22" font-size="10" font-weight="400" fill="#5C5650">Inter 600 22px · 2 satır</text>
+      </g>
+      <g transform="translate(0, 120)">
+        <circle cx="9" cy="9" r="9" fill="#3D5A47"/>
+        <text x="9" y="12" font-size="9" font-weight="600" fill="#FAF8F4" text-anchor="middle">3</text>
+        <text x="26" y="8" font-size="11" font-weight="600" fill="#1F1B16">Company + location</text>
+        <text x="26" y="22" font-size="10" font-weight="400" fill="#5C5650">Inter 400 14px · text-secondary</text>
+      </g>
+      <g transform="translate(0, 162)">
+        <circle cx="9" cy="9" r="9" fill="#3D5A47"/>
+        <text x="9" y="12" font-size="9" font-weight="600" fill="#FAF8F4" text-anchor="middle">4</text>
+        <text x="26" y="8" font-size="11" font-weight="600" fill="#1F1B16">Status badge + date</text>
+        <text x="26" y="22" font-size="10" font-weight="400" fill="#5C5650">Yan yana · mono date sağda</text>
+      </g>
+      <g transform="translate(0, 204)">
+        <circle cx="9" cy="9" r="9" fill="#3D5A47"/>
+        <text x="9" y="12" font-size="9" font-weight="600" fill="#FAF8F4" text-anchor="middle">5</text>
+        <text x="26" y="8" font-size="11" font-weight="600" fill="#1F1B16">Süreç timeline</text>
+        <text x="26" y="22" font-size="10" font-weight="400" fill="#5C5650">4 nokta · check ikon · aktif halka</text>
+      </g>
+      <g transform="translate(0, 246)">
+        <circle cx="9" cy="9" r="9" fill="#3D5A47"/>
+        <text x="9" y="12" font-size="9" font-weight="600" fill="#FAF8F4" text-anchor="middle">6</text>
+        <text x="26" y="8" font-size="11" font-weight="600" fill="#1F1B16">Notlar kartı</text>
+        <text x="26" y="22" font-size="10" font-weight="400" fill="#5C5650">Tarihli giriler · ayraç çizgi</text>
+      </g>
+      <g transform="translate(0, 288)">
+        <circle cx="9" cy="9" r="9" fill="#3D5A47"/>
+        <text x="9" y="12" font-size="9" font-weight="600" fill="#FAF8F4" text-anchor="middle">7</text>
+        <text x="26" y="8" font-size="11" font-weight="600" fill="#1F1B16">Primary CTA</text>
+        <text x="26" y="22" font-size="10" font-weight="400" fill="#5C5650">Accent · 36px · krem text</text>
+      </g>
+      <g transform="translate(0, 330)">
+        <circle cx="9" cy="9" r="9" fill="#3D5A47"/>
+        <text x="9" y="12" font-size="9" font-weight="600" fill="#FAF8F4" text-anchor="middle">8</text>
+        <text x="26" y="8" font-size="11" font-weight="600" fill="#1F1B16">Secondary CTA</text>
+        <text x="26" y="22" font-size="10" font-weight="400" fill="#5C5650">Outline · D9D3C8 border</text>
+      </g>
+    </g>
+  </g>
+
+  <line x1="50" y1="950" x2="1230" y2="950" stroke="#EBE7DF" stroke-width="0.5"/>
+
+  <g transform="translate(50, 990)">
+    <text x="0" y="0" font-size="11" font-weight="600" fill="#3D5A47" letter-spacing="1">EKRAN 03 · YÜZ B</text>
+    <text x="0" y="24" font-size="18" font-weight="600" fill="#1F1B16">Onboarding Hero</text>
+    <text x="0" y="44" font-size="12" font-weight="400" fill="#5C5650">Atmosferik koyu zemin · büyük italic editorial başlık · pusula sembolü</text>
+
+    <g transform="translate(0, 70)">
+      <rect width="240" height="520" rx="32" fill="#243530"/>
+      <rect width="240" height="520" rx="32" fill="url(#forestDotsW)"/>
+
+      <text x="14" y="22" font-size="9" font-weight="600" fill="#FAF8F4">9:41</text>
+
+      <text x="226" y="56" font-size="10" font-weight="500" fill="#B8B0A4" text-anchor="end">Atla</text>
+
+      <g transform="translate(20, 50)">
+        <rect width="12" height="3" rx="1.5" fill="#FAF8F4"/>
+        <rect x="16" width="6" height="3" rx="1.5" fill="#FAF8F4" opacity="0.30"/>
+        <rect x="26" width="6" height="3" rx="1.5" fill="#FAF8F4" opacity="0.30"/>
+      </g>
+
+      <g transform="translate(120, 170)">
+        <circle r="42" fill="#3D5A47" opacity="0.12"/>
+        <circle r="34" fill="none" stroke="#FAF8F4" stroke-width="0.8" opacity="0.20"/>
+        <circle r="20" fill="none" stroke="#FAF8F4" stroke-width="0.6" opacity="0.12"/>
+        <path d="M 0 -28 L 4 0 L 0 28 L -4 0 Z" fill="#FAF8F4"/>
+        <circle r="2" fill="#243530"/>
+      </g>
+
+      <text x="20" y="276" font-size="20" font-weight="300" font-style="italic" fill="#FAF8F4">Sadece bir takipçi</text>
+      <text x="20" y="300" font-size="20" font-weight="300" font-style="italic" fill="#FAF8F4">değil. Bir <tspan fill="#B8C9BD">pusula.</tspan></text>
+
+      <text x="20" y="338" font-size="11" font-weight="400" fill="#B8B0A4">Başvurularını topla, örüntüleri</text>
+      <text x="20" y="354" font-size="11" font-weight="400" fill="#B8B0A4">gör, kendi yönünü bul.</text>
+
+      <rect x="20" y="450" width="200" height="40" rx="10" fill="#FAF8F4"/>
+      <text x="120" y="475" font-size="11" font-weight="500" fill="#1F1B16" text-anchor="middle">Devam et</text>
+
+      <g transform="translate(0, 0)">
+        <line x1="14" y1="22" x2="-30" y2="22" stroke="#3D5A47" stroke-width="0.5" stroke-dasharray="2 2"/>
+        <circle cx="-32" cy="22" r="9" fill="#3D5A47"/>
+        <text x="-32" y="25" font-size="9" font-weight="600" fill="#FAF8F4" text-anchor="middle">1</text>
+      </g>
+      <g transform="translate(0, 0)">
+        <line x1="220" y1="56" x2="270" y2="56" stroke="#3D5A47" stroke-width="0.5" stroke-dasharray="2 2"/>
+        <circle cx="272" cy="56" r="9" fill="#3D5A47"/>
+        <text x="272" y="59" font-size="9" font-weight="600" fill="#FAF8F4" text-anchor="middle">2</text>
+      </g>
+      <g transform="translate(0, 0)">
+        <line x1="50" y1="52" x2="-30" y2="52" stroke="#3D5A47" stroke-width="0.5" stroke-dasharray="2 2"/>
+        <circle cx="-32" cy="52" r="9" fill="#3D5A47"/>
+        <text x="-32" y="55" font-size="9" font-weight="600" fill="#FAF8F4" text-anchor="middle">3</text>
+      </g>
+      <g transform="translate(0, 0)">
+        <line x1="158" y1="170" x2="270" y2="170" stroke="#3D5A47" stroke-width="0.5" stroke-dasharray="2 2"/>
+        <circle cx="272" cy="170" r="9" fill="#3D5A47"/>
+        <text x="272" y="173" font-size="9" font-weight="600" fill="#FAF8F4" text-anchor="middle">4</text>
+      </g>
+      <g transform="translate(0, 0)">
+        <line x1="170" y1="290" x2="270" y2="290" stroke="#3D5A47" stroke-width="0.5" stroke-dasharray="2 2"/>
+        <circle cx="272" cy="290" r="9" fill="#3D5A47"/>
+        <text x="272" y="293" font-size="9" font-weight="600" fill="#FAF8F4" text-anchor="middle">5</text>
+      </g>
+      <g transform="translate(0, 0)">
+        <line x1="160" y1="346" x2="270" y2="346" stroke="#3D5A47" stroke-width="0.5" stroke-dasharray="2 2"/>
+        <circle cx="272" cy="346" r="9" fill="#3D5A47"/>
+        <text x="272" y="349" font-size="9" font-weight="600" fill="#FAF8F4" text-anchor="middle">6</text>
+      </g>
+      <g transform="translate(0, 0)">
+        <line x1="120" y1="470" x2="270" y2="470" stroke="#3D5A47" stroke-width="0.5" stroke-dasharray="2 2"/>
+        <circle cx="272" cy="470" r="9" fill="#3D5A47"/>
+        <text x="272" y="473" font-size="9" font-weight="600" fill="#FAF8F4" text-anchor="middle">7</text>
+      </g>
+    </g>
+
+    <g transform="translate(310, 70)">
+      <text x="0" y="14" font-size="11" font-weight="600" fill="#1F1B16">Component anatomy</text>
+      <line x1="0" y1="22" x2="240" y2="22" stroke="#EBE7DF" stroke-width="0.5"/>
+
+      <g transform="translate(0, 36)">
+        <circle cx="9" cy="9" r="9" fill="#3D5A47"/>
+        <text x="9" y="12" font-size="9" font-weight="600" fill="#FAF8F4" text-anchor="middle">1</text>
+        <text x="26" y="8" font-size="11" font-weight="600" fill="#1F1B16">Status bar (light)</text>
+        <text x="26" y="22" font-size="10" font-weight="400" fill="#5C5650">Krem text · koyu zemin için</text>
+      </g>
+      <g transform="translate(0, 78)">
+        <circle cx="9" cy="9" r="9" fill="#3D5A47"/>
+        <text x="9" y="12" font-size="9" font-weight="600" fill="#FAF8F4" text-anchor="middle">2</text>
+        <text x="26" y="8" font-size="11" font-weight="600" fill="#1F1B16">Skip link</text>
+        <text x="26" y="22" font-size="10" font-weight="400" fill="#5C5650">Sağ üst · text-on-dark-muted</text>
+      </g>
+      <g transform="translate(0, 120)">
+        <circle cx="9" cy="9" r="9" fill="#3D5A47"/>
+        <text x="9" y="12" font-size="9" font-weight="600" fill="#FAF8F4" text-anchor="middle">3</text>
+        <text x="26" y="8" font-size="11" font-weight="600" fill="#1F1B16">Progress dots</text>
+        <text x="26" y="22" font-size="10" font-weight="400" fill="#5C5650">3 nokta · aktif uzun çizgi</text>
+      </g>
+      <g transform="translate(0, 162)">
+        <circle cx="9" cy="9" r="9" fill="#3D5A47"/>
+        <text x="9" y="12" font-size="9" font-weight="600" fill="#FAF8F4" text-anchor="middle">4</text>
+        <text x="26" y="8" font-size="11" font-weight="600" fill="#1F1B16">Compass + glow</text>
+        <text x="26" y="22" font-size="10" font-weight="400" fill="#5C5650">Outline pusula · accent halo</text>
+      </g>
+      <g transform="translate(0, 204)">
+        <circle cx="9" cy="9" r="9" fill="#3D5A47"/>
+        <text x="9" y="12" font-size="9" font-weight="600" fill="#FAF8F4" text-anchor="middle">5</text>
+        <text x="26" y="8" font-size="11" font-weight="600" fill="#1F1B16">Editorial headline</text>
+        <text x="26" y="22" font-size="10" font-weight="400" fill="#5C5650">Inter Light Italic 26-32px</text>
+      </g>
+      <g transform="translate(0, 246)">
+        <circle cx="9" cy="9" r="9" fill="#3D5A47"/>
+        <text x="9" y="12" font-size="9" font-weight="600" fill="#FAF8F4" text-anchor="middle">6</text>
+        <text x="26" y="8" font-size="11" font-weight="600" fill="#1F1B16">Body text</text>
+        <text x="26" y="22" font-size="10" font-weight="400" fill="#5C5650">Inter 400 14px · muted</text>
+      </g>
+      <g transform="translate(0, 288)">
+        <circle cx="9" cy="9" r="9" fill="#3D5A47"/>
+        <text x="9" y="12" font-size="9" font-weight="600" fill="#FAF8F4" text-anchor="middle">7</text>
+        <text x="26" y="8" font-size="11" font-weight="600" fill="#1F1B16">Primary CTA (light)</text>
+        <text x="26" y="22" font-size="10" font-weight="400" fill="#5C5650">Krem bg · antrasit text</text>
+      </g>
+    </g>
+  </g>
+
+  <g transform="translate(660, 990)">
+    <text x="0" y="0" font-size="11" font-weight="600" fill="#3D5A47" letter-spacing="1">EKRAN 04 · YÜZ B</text>
+    <text x="0" y="24" font-size="18" font-weight="600" fill="#1F1B16">Milestone</text>
+    <text x="0" y="44" font-size="12" font-weight="400" fill="#5C5650">Anlamlı an · vignette glow · sessiz takdir tonu</text>
+
+    <g transform="translate(0, 70)">
+      <rect width="240" height="520" rx="32" fill="#1A2622"/>
+      <rect width="240" height="520" rx="32" fill="url(#darkDotsW)"/>
+      <rect width="240" height="520" rx="32" fill="url(#milestoneGlowW)"/>
+
+      <text x="14" y="22" font-size="9" font-weight="600" fill="#FAF8F4">9:41</text>
+
+      <g transform="translate(208, 44)">
+        <rect width="20" height="20" rx="10" fill="#FAF8F4" opacity="0.10"/>
+        <line x1="7" y1="7" x2="13" y2="13" stroke="#FAF8F4" stroke-width="1" stroke-linecap="round" opacity="0.7"/>
+        <line x1="13" y1="7" x2="7" y2="13" stroke="#FAF8F4" stroke-width="1" stroke-linecap="round" opacity="0.7"/>
+      </g>
+      <text x="14" y="60" font-size="9" font-weight="500" fill="#8A8278" letter-spacing="1.6">BİR AN</text>
+
+      <g transform="translate(120, 170)">
+        <circle r="28" fill="#3D5A47" opacity="0.10"/>
+        <circle r="20" fill="none" stroke="#FAF8F4" stroke-width="0.5" opacity="0.18"/>
+        <path d="M 0 -18 L 3 0 L 0 18 L -3 0 Z" fill="#FAF8F4"/>
+        <circle r="1.5" fill="#1A2622"/>
+      </g>
+
+      <text x="120" y="244" font-size="9" font-weight="500" fill="#B8C9BD" letter-spacing="1.6" text-anchor="middle">10. BAŞVURU</text>
+
+      <text x="120" y="284" font-size="22" font-weight="300" font-style="italic" fill="#FAF8F4" text-anchor="middle">Sadece sayı değil.</text>
+      <text x="120" y="312" font-size="22" font-weight="300" font-style="italic" fill="#B8C9BD" text-anchor="middle">Bir patika.</text>
+
+      <text x="20" y="356" font-size="11" font-weight="400" fill="#B8B0A4">İlk başvurundan bugüne 23 gün</text>
+      <text x="20" y="372" font-size="11" font-weight="400" fill="#B8B0A4">geçti. En çok süreç tasarım rolüne</text>
+      <text x="20" y="388" font-size="11" font-weight="400" fill="#B8B0A4">yöneldin — 6 başvurunun 3'ü</text>
+      <text x="20" y="404" font-size="11" font-weight="400" fill="#B8B0A4">mülakata kadar geldi.</text>
+
+      <rect x="20" y="450" width="200" height="40" rx="10" fill="#FAF8F4"/>
+      <text x="120" y="475" font-size="11" font-weight="500" fill="#1F1B16" text-anchor="middle">Yolculuğuma bak</text>
+
+      <g transform="translate(0, 0)">
+        <line x1="208" y1="54" x2="270" y2="54" stroke="#3D5A47" stroke-width="0.5" stroke-dasharray="2 2"/>
+        <circle cx="272" cy="54" r="9" fill="#3D5A47"/>
+        <text x="272" y="57" font-size="9" font-weight="600" fill="#FAF8F4" text-anchor="middle">1</text>
+      </g>
+      <g transform="translate(0, 0)">
+        <line x1="50" y1="60" x2="-30" y2="60" stroke="#3D5A47" stroke-width="0.5" stroke-dasharray="2 2"/>
+        <circle cx="-32" cy="60" r="9" fill="#3D5A47"/>
+        <text x="-32" y="63" font-size="9" font-weight="600" fill="#FAF8F4" text-anchor="middle">2</text>
+      </g>
+      <g transform="translate(0, 0)">
+        <line x1="148" y1="170" x2="270" y2="170" stroke="#3D5A47" stroke-width="0.5" stroke-dasharray="2 2"/>
+        <circle cx="272" cy="170" r="9" fill="#3D5A47"/>
+        <text x="272" y="173" font-size="9" font-weight="600" fill="#FAF8F4" text-anchor="middle">3</text>
+      </g>
+      <g transform="translate(0, 0)">
+        <line x1="170" y1="244" x2="270" y2="244" stroke="#3D5A47" stroke-width="0.5" stroke-dasharray="2 2"/>
+        <circle cx="272" cy="244" r="9" fill="#3D5A47"/>
+        <text x="272" y="247" font-size="9" font-weight="600" fill="#FAF8F4" text-anchor="middle">4</text>
+      </g>
+      <g transform="translate(0, 0)">
+        <line x1="190" y1="298" x2="270" y2="298" stroke="#3D5A47" stroke-width="0.5" stroke-dasharray="2 2"/>
+        <circle cx="272" cy="298" r="9" fill="#3D5A47"/>
+        <text x="272" y="301" font-size="9" font-weight="600" fill="#FAF8F4" text-anchor="middle">5</text>
+      </g>
+      <g transform="translate(0, 0)">
+        <line x1="180" y1="380" x2="270" y2="380" stroke="#3D5A47" stroke-width="0.5" stroke-dasharray="2 2"/>
+        <circle cx="272" cy="380" r="9" fill="#3D5A47"/>
+        <text x="272" y="383" font-size="9" font-weight="600" fill="#FAF8F4" text-anchor="middle">6</text>
+      </g>
+      <g transform="translate(0, 0)">
+        <line x1="120" y1="470" x2="270" y2="470" stroke="#3D5A47" stroke-width="0.5" stroke-dasharray="2 2"/>
+        <circle cx="272" cy="470" r="9" fill="#3D5A47"/>
+        <text x="272" y="473" font-size="9" font-weight="600" fill="#FAF8F4" text-anchor="middle">7</text>
+      </g>
+    </g>
+
+    <g transform="translate(310, 70)">
+      <text x="0" y="14" font-size="11" font-weight="600" fill="#1F1B16">Component anatomy</text>
+      <line x1="0" y1="22" x2="240" y2="22" stroke="#EBE7DF" stroke-width="0.5"/>
+
+      <g transform="translate(0, 36)">
+        <circle cx="9" cy="9" r="9" fill="#3D5A47"/>
+        <text x="9" y="12" font-size="9" font-weight="600" fill="#FAF8F4" text-anchor="middle">1</text>
+        <text x="26" y="8" font-size="11" font-weight="600" fill="#1F1B16">Dismiss button</text>
+        <text x="26" y="22" font-size="10" font-weight="400" fill="#5C5650">8% beyaz · subtle olmaz</text>
+      </g>
+      <g transform="translate(0, 78)">
+        <circle cx="9" cy="9" r="9" fill="#3D5A47"/>
+        <text x="9" y="12" font-size="9" font-weight="600" fill="#FAF8F4" text-anchor="middle">2</text>
+        <text x="26" y="8" font-size="11" font-weight="600" fill="#1F1B16">Section label</text>
+        <text x="26" y="22" font-size="10" font-weight="400" fill="#5C5650">Uppercase · letterspacing 1.6</text>
+      </g>
+      <g transform="translate(0, 120)">
+        <circle cx="9" cy="9" r="9" fill="#3D5A47"/>
+        <text x="9" y="12" font-size="9" font-weight="600" fill="#FAF8F4" text-anchor="middle">3</text>
+        <text x="26" y="8" font-size="11" font-weight="600" fill="#1F1B16">Compass mark + glow</text>
+        <text x="26" y="22" font-size="10" font-weight="400" fill="#5C5650">Filled needle · accent halo</text>
+      </g>
+      <g transform="translate(0, 162)">
+        <circle cx="9" cy="9" r="9" fill="#3D5A47"/>
+        <text x="9" y="12" font-size="9" font-weight="600" fill="#FAF8F4" text-anchor="middle">4</text>
+        <text x="26" y="8" font-size="11" font-weight="600" fill="#1F1B16">Caption (sage)</text>
+        <text x="26" y="22" font-size="10" font-weight="400" fill="#5C5650">Aksent renk · tracking 1.6</text>
+      </g>
+      <g transform="translate(0, 204)">
+        <circle cx="9" cy="9" r="9" fill="#3D5A47"/>
+        <text x="9" y="12" font-size="9" font-weight="600" fill="#FAF8F4" text-anchor="middle">5</text>
+        <text x="26" y="8" font-size="11" font-weight="600" fill="#1F1B16">Editorial headline</text>
+        <text x="26" y="22" font-size="10" font-weight="400" fill="#5C5650">Inter Light Italic 28-32px</text>
+      </g>
+      <g transform="translate(0, 246)">
+        <circle cx="9" cy="9" r="9" fill="#3D5A47"/>
+        <text x="9" y="12" font-size="9" font-weight="600" fill="#FAF8F4" text-anchor="middle">6</text>
+        <text x="26" y="8" font-size="11" font-weight="600" fill="#1F1B16">Description body</text>
+        <text x="26" y="22" font-size="10" font-weight="400" fill="#5C5650">Veriye dayalı · text-secondary</text>
+      </g>
+      <g transform="translate(0, 288)">
+        <circle cx="9" cy="9" r="9" fill="#3D5A47"/>
+        <text x="9" y="12" font-size="9" font-weight="600" fill="#FAF8F4" text-anchor="middle">7</text>
+        <text x="26" y="8" font-size="11" font-weight="600" fill="#1F1B16">Primary CTA (light)</text>
+        <text x="26" y="22" font-size="10" font-weight="400" fill="#5C5650">Krem · "yolculuğuma bak"</text>
+      </g>
+    </g>
+  </g>
+
+  <text x="50" y="1820" font-size="11" font-weight="400" fill="#8A8278">Applyze v1.0 · 4 ekran detaylı annotation · Mayıs 2026</text>
+
+</svg>
