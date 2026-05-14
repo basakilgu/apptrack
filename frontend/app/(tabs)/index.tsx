@@ -14,7 +14,7 @@ import { Badge } from "../../components/ui/Badge";
 import { EmptyState } from "../../components/ui/EmptyState";
 import {
   useApplications, getCounts, formatDateTr, getStageOrder, platformColors, platformLabels,
-} from "../../lib/mockData";
+} from "../../lib/applications";
 import type { StageKey, Platform } from "../../types/database";
 
 type FilterKey = "all" | "active" | "interview" | "archive" | "favorites";
