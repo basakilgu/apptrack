@@ -1,14 +1,15 @@
 // app/(tabs)/profile.tsx — Profil ekranı
-// Sadece useApplications dış bağımlılık. Geri kalan her şey içeride.
+// Supabase auth ile gerçek kullanıcı bilgisi.
 
-import React, { useMemo, useState, useId } from "react";
-import { View, Text, ScrollView, Alert, Pressable, Switch } from "react-native";
+import React, { useMemo, useState, useId, useEffect } from "react";
+import { View, Text, ScrollView, Alert, Pressable, Switch, Platform } from "react-native";
 import { useRouter } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { StatusBar } from "expo-status-bar";
 import Svg, { Path, Circle, Defs, RadialGradient, Stop } from "react-native-svg";
 
-import { useApplications } from "../../lib/mockData";
+import { useApplications } from "../../lib/applications";
+import { supabase } from "../../lib/supabase";
 
 // =============================================================
 // THEME
@@ -58,20 +59,13 @@ const shadows = {
 };
 
 // =============================================================
-// USER (hardcoded — no dependency)
-// =============================================================
-
-const USER = {
-  full_name: "Başak İlgü",
-  email: "basak@example.com",
-  member_since: "2026-03-15T00:00:00Z",
-};
-
-// =============================================================
 // HELPERS
 // =============================================================
 
-const MONTHS_LONG = ["Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"];
+const MONTHS_LONG = [
+  "Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran",
+  "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık",
+];
 
 function formatDateLongTr(iso: string): string {
   if (!iso) return "";
@@ -218,7 +212,7 @@ function ChevronRight({
 }
 
 // =============================================================
-// SettingRow / SwitchRow
+// SettingRow / SwitchRow / StatColumn
 // =============================================================
 
 function SettingRow({
@@ -385,30 +379,94 @@ export default function ProfileScreen() {
   const [notificationsEnabled, setNotificationsEnabled] = useState(true);
   const [silentMode, setSilentMode] = useState(true);
 
-  const handleSignOut = () => {
-    Alert.alert("Çıkış yap", "Hesabından çıkış yapmak istediğine emin misin?", [
-      { text: "İptal", style: "cancel" },
-      {
-        text: "Çıkış yap",
-        style: "destructive",
-        onPress: () => router.replace("/(auth)/login"),
-      },
-    ]);
+  // Supabase'den gerçek kullanıcı bilgisi
+  const [user, setUser] = useState<{
+    full_name: string;
+    email: string;
+    member_since: string;
+  }>({
+    full_name: "Yükleniyor...",
+    email: "",
+    member_since: new Date().toISOString(),
+  });
+
+  useEffect(() => {
+    (async () => {
+      const { data } = await supabase.auth.getUser();
+      if (data.user) {
+        const email = data.user.email ?? "";
+        const fullName =
+          (data.user.user_metadata?.full_name as string | undefined) ??
+          email.split("@")[0]; // metadata yoksa email'in kullanıcı kısmını göster
+        setUser({
+          full_name: fullName,
+          email,
+          member_since: data.user.created_at ?? new Date().toISOString(),
+        });
+      }
+    })();
+  }, []);
+
+const handleSignOut = async () => {
+    const confirmed =
+      Platform.OS === "web"
+        ? typeof window !== "undefined" &&
+          window.confirm("Hesabından çıkış yapmak istediğine emin misin?")
+        : await new Promise<boolean>((resolve) => {
+            Alert.alert(
+              "Çıkış yap",
+              "Hesabından çıkış yapmak istediğine emin misin?",
+              [
+                { text: "İptal", style: "cancel", onPress: () => resolve(false) },
+                {
+                  text: "Çıkış yap",
+                  style: "destructive",
+                  onPress: () => resolve(true),
+                },
+              ]
+            );
+          });
+
+    if (!confirmed) return;
+
+    const { error } = await supabase.auth.signOut();
+    if (error) {
+      console.error("Çıkış hatası:", error);
+      if (Platform.OS === "web" && typeof window !== "undefined") {
+        window.alert("Çıkış yapılamadı: " + error.message);
+      }
+      return;
+    }
+    router.replace("/(auth)/login");
   };
 
-  const handleDeleteAccount = () => {
-    Alert.alert(
-      "Hesabı sil",
-      "Tüm başvuruların ve verilerin kalıcı olarak silinecek. Bu işlem geri alınamaz.",
-      [
-        { text: "İptal", style: "cancel" },
-        {
-          text: "Hesabı sil",
-          style: "destructive",
-          onPress: () => router.replace("/(auth)/login"),
-        },
-      ]
-    );
+  const handleDeleteAccount = async () => {
+    const confirmed =
+      Platform.OS === "web"
+        ? typeof window !== "undefined" &&
+          window.confirm(
+            "Tüm başvuruların ve verilerin kalıcı olarak silinecek. Bu işlem geri alınamaz. Devam edilsin mi?"
+          )
+        : await new Promise<boolean>((resolve) => {
+            Alert.alert(
+              "Hesabı sil",
+              "Tüm başvuruların ve verilerin kalıcı olarak silinecek. Bu işlem geri alınamaz.",
+              [
+                { text: "İptal", style: "cancel", onPress: () => resolve(false) },
+                {
+                  text: "Hesabı sil",
+                  style: "destructive",
+                  onPress: () => resolve(true),
+                },
+              ]
+            );
+          });
+
+    if (!confirmed) return;
+
+    // TODO: gerçek hesap silme akışı (Edge Function ile)
+    await supabase.auth.signOut();
+    router.replace("/(auth)/login");
   };
 
   return (
@@ -509,7 +567,7 @@ export default function ProfileScreen() {
                   zIndex: 1,
                 }}
               >
-                {USER.full_name}
+                {user.full_name}
               </Text>
               <Text
                 style={{
@@ -521,7 +579,7 @@ export default function ProfileScreen() {
                   zIndex: 1,
                 }}
               >
-                {USER.email}
+                {user.email}
               </Text>
               <Text
                 style={{
@@ -534,7 +592,7 @@ export default function ProfileScreen() {
                   zIndex: 1,
                 }}
               >
-                Üye · {formatDateLongTr(USER.member_since)}
+                Üye · {formatDateLongTr(user.member_since)}
               </Text>
             </View>
           </View>

@@ -1,26 +1,44 @@
-// app/index.tsx — Splash
+// app/index.tsx — Splash + Session Check
 import React, { useEffect } from "react";
 import { View, Text } from "react-native";
 import { useRouter } from "expo-router";
 import { StatusBar } from "expo-status-bar";
-
 import { CompassMark } from "../components/ui/CompassMark";
+import { supabase } from "../lib/supabase";
 
 export default function SplashScreen() {
   const router = useRouter();
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      router.replace("/(auth)/login");
-    }, 1800);
-    return () => clearTimeout(timer);
+    let mounted = true;
+    const startedAt = Date.now();
+    const MIN_SPLASH_MS = 1200;
+
+    (async () => {
+      const { data } = await supabase.auth.getSession();
+      if (!mounted) return;
+
+      const elapsed = Date.now() - startedAt;
+      const wait = Math.max(0, MIN_SPLASH_MS - elapsed);
+
+      setTimeout(() => {
+        if (!mounted) return;
+        if (data.session) {
+          router.replace("/(tabs)");
+        } else {
+          router.replace("/(auth)/login");
+        }
+      }, wait);
+    })();
+
+    return () => {
+      mounted = false;
+    };
   }, [router]);
 
   return (
     <View style={{ flex: 1, backgroundColor: "#1A2622", alignItems: "center", justifyContent: "center" }}>
       <StatusBar style="light" />
-
-      {/* App icon */}
       <View
         style={{
           width: 88, height: 88, borderRadius: 22,
@@ -33,12 +51,9 @@ export default function SplashScreen() {
       >
         <CompassMark size={64} variant="filled" color="#FAF8F4" />
       </View>
-
-      {/* Brand */}
       <Text style={{ fontSize: 26, color: "#FAF8F4", fontFamily: "Inter_300Light", letterSpacing: -0.5 }}>
         Applyze
       </Text>
-
       <Text
         style={{
           fontSize: 10, color: "#8A8278",

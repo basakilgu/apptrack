@@ -1,12 +1,13 @@
 // app/(auth)/login.tsx
-import React from "react";
-import { View, Text, Pressable } from "react-native";
+import React, { useState } from "react";
+import { View, Text, Pressable, TextInput, ActivityIndicator, KeyboardAvoidingView, Platform } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useRouter } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import Svg, { Path } from "react-native-svg";
 
 import { CompassMark } from "../../components/ui/CompassMark";
+import { supabase } from "../../lib/supabase";
 
 function MailIcon({ color = "#1F1B16" }: { color?: string }) {
   return (
@@ -28,24 +29,229 @@ function AppleLogo() {
   );
 }
 
+function BackIcon() {
+  return (
+    <Svg width={20} height={20} viewBox="0 0 20 20">
+      <Path d="M 13 4 L 7 10 L 13 16" fill="none" stroke="#1F1B16" strokeWidth={1.6} strokeLinecap="round" strokeLinejoin="round" />
+    </Svg>
+  );
+}
+
+type Mode = "select" | "email-login" | "email-signup";
+
 export default function LoginScreen() {
   const router = useRouter();
+  const [mode, setMode] = useState<Mode>("select");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [info, setInfo] = useState<string | null>(null);
 
-  const handleAppleSignIn = () => {
-    router.replace("/(onboarding)");
+  const handleEmailLogin = async () => {
+    if (!email.trim() || !password) {
+      setError("E-posta ve şifre gerekli.");
+      return;
+    }
+    setLoading(true);
+    setError(null);
+    setInfo(null);
+
+    const { error } = await supabase.auth.signInWithPassword({
+      email: email.trim(),
+      password,
+    });
+
+    if (error) {
+      setError(error.message === "Invalid login credentials"
+        ? "E-posta veya şifre hatalı."
+        : error.message);
+      setLoading(false);
+      return;
+    }
+    // Başarılı: root layout otomatik yönlendirecek
+    setLoading(false);
   };
 
-  const handleEmailSignIn = () => {
-    router.replace("/(onboarding)");
+  const handleEmailSignup = async () => {
+    if (!email.trim() || !password) {
+      setError("E-posta ve şifre gerekli.");
+      return;
+    }
+    if (password.length < 6) {
+      setError("Şifre en az 6 karakter olmalı.");
+      return;
+    }
+    setLoading(true);
+    setError(null);
+    setInfo(null);
+
+    const { data, error } = await supabase.auth.signUp({
+      email: email.trim(),
+      password,
+    });
+
+    if (error) {
+      setError(error.message);
+      setLoading(false);
+      return;
+    }
+
+    if (data.session) {
+      // Otomatik giriş yapıldı (email doğrulama kapalı)
+      setLoading(false);
+    } else {
+      // Email doğrulama bekleniyor
+      setInfo("Kaydın oluşturuldu. E-postanı doğrulamak için gelen kutunu kontrol et.");
+      setLoading(false);
+    }
   };
 
+  // ============ EMAIL LOGIN/SIGNUP FORM ============
+  if (mode === "email-login" || mode === "email-signup") {
+    const isLogin = mode === "email-login";
+    return (
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : undefined}
+        style={{ flex: 1, backgroundColor: "#FAF8F4" }}
+      >
+        <StatusBar style="dark" />
+        <SafeAreaView edges={["top", "bottom"]} style={{ flex: 1, paddingHorizontal: 28 }}>
+          {/* Back button */}
+          <Pressable
+            onPress={() => {
+              setMode("select");
+              setError(null);
+              setInfo(null);
+            }}
+            style={{ paddingVertical: 12, marginTop: 4, alignSelf: "flex-start" }}
+            hitSlop={10}
+          >
+            <BackIcon />
+          </Pressable>
+
+          <View style={{ flex: 0.2 }} />
+
+          <Text
+            style={{
+              fontSize: 26, color: "#1F1B16",
+              fontFamily: "Inter_600SemiBold", letterSpacing: -0.5,
+              marginBottom: 8,
+            }}
+          >
+            {isLogin ? "Tekrar hoşgeldin." : "Hesabını oluştur."}
+          </Text>
+          <Text
+            style={{
+              fontSize: 14, color: "#8A8278",
+              fontFamily: "Inter_400Regular", lineHeight: 21,
+              marginBottom: 32,
+            }}
+          >
+            {isLogin ? "Yolculuğuna kaldığın yerden devam et." : "Pusulan seni bekliyor."}
+          </Text>
+
+          {/* Email */}
+          <Text style={{ fontSize: 12, color: "#5C5650", fontFamily: "Inter_500Medium", marginBottom: 6 }}>
+            E-posta
+          </Text>
+          <TextInput
+            value={email}
+            onChangeText={setEmail}
+            placeholder="ornek@email.com"
+            placeholderTextColor="#B8B0A4"
+            autoCapitalize="none"
+            keyboardType="email-address"
+            autoComplete="email"
+            style={{
+              height: 52, borderRadius: 12, paddingHorizontal: 16,
+              backgroundColor: "#FFFFFF", borderWidth: 1, borderColor: "#EBE7DF",
+              fontSize: 15, color: "#1F1B16", fontFamily: "Inter_400Regular",
+              marginBottom: 16,
+            }}
+          />
+
+          {/* Password */}
+          <Text style={{ fontSize: 12, color: "#5C5650", fontFamily: "Inter_500Medium", marginBottom: 6 }}>
+            Şifre
+          </Text>
+          <TextInput
+            value={password}
+            onChangeText={setPassword}
+            placeholder={isLogin ? "Şifren" : "En az 6 karakter"}
+            placeholderTextColor="#B8B0A4"
+            secureTextEntry
+            autoComplete={isLogin ? "current-password" : "new-password"}
+            style={{
+              height: 52, borderRadius: 12, paddingHorizontal: 16,
+              backgroundColor: "#FFFFFF", borderWidth: 1, borderColor: "#EBE7DF",
+              fontSize: 15, color: "#1F1B16", fontFamily: "Inter_400Regular",
+              marginBottom: 8,
+            }}
+          />
+
+          {/* Error / Info */}
+          {error && (
+            <Text style={{ fontSize: 13, color: "#A8908F", fontFamily: "Inter_400Regular", marginBottom: 8, marginTop: 4 }}>
+              {error}
+            </Text>
+          )}
+          {info && (
+            <Text style={{ fontSize: 13, color: "#3D5A47", fontFamily: "Inter_400Regular", marginBottom: 8, marginTop: 4 }}>
+              {info}
+            </Text>
+          )}
+
+          <View style={{ flex: 1 }} />
+
+          {/* Primary action */}
+          <Pressable
+            onPress={isLogin ? handleEmailLogin : handleEmailSignup}
+            disabled={loading}
+            style={({ pressed }) => ({
+              height: 52, backgroundColor: "#1F1B16", borderRadius: 12,
+              alignItems: "center", justifyContent: "center",
+              opacity: loading ? 0.6 : pressed ? 0.92 : 1,
+              transform: [{ scale: pressed ? 0.99 : 1 }],
+              marginBottom: 12,
+            })}
+          >
+            {loading ? (
+              <ActivityIndicator color="#FAF8F4" />
+            ) : (
+              <Text style={{ fontSize: 15, color: "#FAF8F4", fontFamily: "Inter_500Medium" }}>
+                {isLogin ? "Giriş yap" : "Hesap oluştur"}
+              </Text>
+            )}
+          </Pressable>
+
+          {/* Toggle */}
+          <Pressable
+            onPress={() => {
+              setMode(isLogin ? "email-signup" : "email-login");
+              setError(null);
+              setInfo(null);
+            }}
+            style={{ alignItems: "center", paddingVertical: 12 }}
+          >
+            <Text style={{ fontSize: 13, color: "#5C5650", fontFamily: "Inter_400Regular" }}>
+              {isLogin
+                ? "Hesabın yok mu? Oluştur"
+                : "Zaten hesabın var mı? Giriş yap"}
+            </Text>
+          </Pressable>
+        </SafeAreaView>
+      </KeyboardAvoidingView>
+    );
+  }
+
+  // ============ SELECT MODE (anaekran) ============
   return (
     <View style={{ flex: 1, backgroundColor: "#FAF8F4" }}>
       <StatusBar style="dark" />
       <SafeAreaView edges={["top", "bottom"]} style={{ flex: 1, paddingHorizontal: 28 }}>
         <View style={{ flex: 0.4 }} />
 
-        {/* Brand */}
         <View style={{ alignItems: "center" }}>
           <View
             style={{
@@ -63,52 +269,32 @@ export default function LoginScreen() {
           <Text style={{ fontSize: 22, color: "#1F1B16", fontFamily: "Inter_600SemiBold", letterSpacing: -0.4 }}>
             Applyze
           </Text>
-          <Text
-            style={{
-              fontSize: 11, color: "#8A8278",
-              marginTop: 6, letterSpacing: 1.4,
-              fontFamily: "Inter_500Medium",
-            }}
-          >
+          <Text style={{ fontSize: 11, color: "#8A8278", marginTop: 6, letterSpacing: 1.4, fontFamily: "Inter_500Medium" }}>
             KARİYER PUSULASI
           </Text>
         </View>
 
         <View style={{ flex: 0.5 }} />
 
-        {/* Editorial */}
         <View style={{ alignItems: "center" }}>
-          <Text
-            style={{
-              fontSize: 22, color: "#1F1B16",
-              fontFamily: "Inter_300Light",
-              textAlign: "center", lineHeight: 30, letterSpacing: -0.3,
-            }}
-          >
+          <Text style={{ fontSize: 22, color: "#1F1B16", fontFamily: "Inter_300Light", textAlign: "center", lineHeight: 30, letterSpacing: -0.3 }}>
             Yolculuğun başlasın.
           </Text>
-          <Text
-            style={{
-              fontSize: 14, color: "#8A8278",
-              textAlign: "center", marginTop: 10,
-              fontFamily: "Inter_400Regular", lineHeight: 21, maxWidth: 280,
-            }}
-          >
+          <Text style={{ fontSize: 14, color: "#8A8278", textAlign: "center", marginTop: 10, fontFamily: "Inter_400Regular", lineHeight: 21, maxWidth: 280 }}>
             Hesabınla giriş yap, başvurularını organize et.
           </Text>
         </View>
 
         <View style={{ flex: 1 }} />
 
-        {/* Auth buttons */}
+        {/* Apple — şimdilik disabled */}
         <View style={{ marginBottom: 12 }}>
           <Pressable
-            onPress={handleAppleSignIn}
+            onPress={() => setError("Apple ile giriş yakında.")}
             style={({ pressed }) => ({
               height: 52, backgroundColor: "#1F1B16", borderRadius: 12,
               flexDirection: "row", alignItems: "center", justifyContent: "center",
-              opacity: pressed ? 0.92 : 1,
-              transform: [{ scale: pressed ? 0.99 : 1 }],
+              opacity: pressed ? 0.92 : 0.5,
             })}
           >
             <AppleLogo />
@@ -119,7 +305,7 @@ export default function LoginScreen() {
         </View>
 
         <Pressable
-          onPress={handleEmailSignIn}
+          onPress={() => setMode("email-login")}
           style={({ pressed }) => ({
             height: 52, backgroundColor: "transparent", borderRadius: 12,
             borderWidth: 1, borderColor: "#D9D3C8",
@@ -134,14 +320,13 @@ export default function LoginScreen() {
           </Text>
         </Pressable>
 
-        {/* Privacy */}
-        <Text
-          style={{
-            fontSize: 11, color: "#B8B0A4",
-            textAlign: "center", marginTop: 20, marginBottom: 8,
-            fontFamily: "Inter_400Regular", lineHeight: 16,
-          }}
-        >
+        {error && (
+          <Text style={{ fontSize: 12, color: "#A8908F", textAlign: "center", marginTop: 12, fontFamily: "Inter_400Regular" }}>
+            {error}
+          </Text>
+        )}
+
+        <Text style={{ fontSize: 11, color: "#B8B0A4", textAlign: "center", marginTop: 20, marginBottom: 8, fontFamily: "Inter_400Regular", lineHeight: 16 }}>
           Devam ederek <Text style={{ color: "#5C5650" }}>Kullanım Koşulları</Text> ve{"\n"}
           <Text style={{ color: "#5C5650" }}>Gizlilik Politikası</Text>'nı kabul etmiş olursun.
         </Text>
