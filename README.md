@@ -19,7 +19,7 @@ Başvurularını sadece kayıt altına alma — yönünü gör.
 
 ## Mevcut Durum
 
-Bu repo şu anda **tasarım ve frontend demosu** olarak çalışıyor. Tüm ekranlar mock veriyle render ediliyor; backend, kimlik doğrulama ve otomatik bilgi çekme henüz bağlı değil.
+Backend (Supabase: şema, RLS, Auth, Edge Functions, cron) ayakta ve frontend'e bağlanmış durumda. Auth, başvuru CRUD, tekrar kontrolü ve günlük hareketsizlik bildirimleri canlıdır. Otomatik bilgi çekme Faz 0.2 araştırması sonrası v2'ye ertelendi (bkz. `docs/MVP_KAPSAM.md` §12).
 
 | Katman | Durum |
 |--------|-------|
@@ -29,7 +29,7 @@ Bu repo şu anda **tasarım ve frontend demosu** olarak çalışıyor. Tüm ekra
 | Aşama yönetimi ve ayarlar ekranları | ✅ Frontend hazır |
 | Milestone (Bir An) ekranı | ✅ Tamamlandı |
 | Backend (Supabase + RLS + Auth) | 🔄 Sonraki sprint |
-| Otomatik bilgi çekme (Kariyer.net, Youthall, Anbean) | 🕐 Planlanan |
+| Otomatik bilgi çekme | ❌ v2'ye ertelendi (Faz 0.2 — PerimeterX bot koruması) |
 | Push bildirim ve elenme analizi | 🕐 Planlanan |
 
 ---
@@ -38,7 +38,7 @@ Bu repo şu anda **tasarım ve frontend demosu** olarak çalışıyor. Tüm ekra
 
 Mevcut iş takip araçları (Huntr, Teal, Simplify) Türk platformlarını desteklemiyor. Applyze bu boşluğu üç temel farklılaştırıcıyla kapatıyor:
 
-- **Yerel platform desteği** — Kariyer.net, Youthall, Anbean için link yapıştır, otomatik doldur
+- **Yerel platform desteği** — Kariyer.net, Youthall, Anbean ve LinkedIn başvurularını tek arşivde organize et
 - **Elenme analizi** — Hangi aşamada takıldığını gösteren içgörü ekranı
 - **Gizlilik öncelikli bildirimler** — Kilit ekranında şirket adı görünmez
 
@@ -164,7 +164,7 @@ Başvuruları platforma, aşamaya, favorilere göre filtrele. Detay ekranında s
 | Gezinme | Expo Router (file-based navigation) |
 | Tasarım sistemi | Inter Variable Font + design system v3 token'ları |
 | SVG ve pusula sembolü | react-native-svg |
-| Backend *(planlanan)* | Supabase (PostgreSQL + RLS + Edge Functions) |
+| Backend | Supabase (PostgreSQL + RLS + Edge Functions + Cron) |
 | Bildirimler *(planlanan)* | Expo Notifications + Supabase Cron |
 | Analitik *(planlanan)* | Amplitude |
 | Dağıtım *(planlanan)* | Expo EAS Build → App Store + Google Play |
@@ -224,7 +224,6 @@ Applyze/
 | Sprint 0 — Tasarım | Yüz A/B sistemi, pusula sembolü, tüm ekran tasarımları | ✅ Tamamlandı |
 | Sprint 1 — Mock demo | Frontend'in mock veriyle çalışır hâle gelmesi | ✅ Tamamlandı *(bu repo)* |
 | Sprint 2 — Backend | Supabase, RLS, kimlik doğrulama, başvuru CRUD | 🔄 Sonraki |
-| Sprint 3 — Otomatik veri çekme | Kariyer.net / Youthall / Anbean parser | 🕐 Planlanan |
 | Sprint 4 — Bildirim ve analiz | Push bildirim (gizlilik öncelikli), elenme analizi | 🕐 Planlanan |
 | Sprint 5 — Yayına alma | App Store + Google Play | 🕐 Planlanan |
 

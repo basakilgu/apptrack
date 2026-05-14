@@ -50,8 +50,8 @@ Applyze, iş arayanların Kariyer.net, LinkedIn, Youthall ve Anbean gibi birden 
 
 | | |
 |--|--|
-| **Kapsam İÇİ** | Başvuru ekleme (link + manuel), aşama takibi (görsel tahta), arşiv, gösterge paneli, elenme analizi, bildirimler, tekrarlayan başvuru uyarısı, özelleştirilebilir aşamalar, başvuru detayı, başvuru silme |
-| **Kapsam DIŞI** | LinkedIn otomatik bilgi çekme, ilan toplama, sosyal özellikler, CV oluşturucu, web uygulaması, yapay zeka tavsiyesi, seri sistemi |
+| **Kapsam İÇİ** | Manuel başvuru ekleme, aşama takibi (görsel tahta), arşiv, gösterge paneli, elenme analizi, bildirimler, tekrarlayan başvuru uyarısı, özelleştirilebilir aşamalar, başvuru detayı, başvuru silme |
+| **Kapsam DIŞI** | Tüm platformlar için otomatik bilgi çekme (Faz 0.2 sonrası v2'ye ertelendi), ilan toplama, sosyal özellikler, CV oluşturucu, web uygulaması, yapay zeka tavsiyesi, seri sistemi |
 | **Platform** | iOS 16+ ve Android 10+ |
 | **Dil** | Türkçe (v1) |
 | **Monetizasyon** | v1'de tamamen ücretsiz |
@@ -135,9 +135,6 @@ Applyze, iş arayanların Kariyer.net, LinkedIn, Youthall ve Anbean gibi birden 
 
 | Özellik ID | Özellik Adı | Öncelik | Sprint |
 |-----------|------------|---------|--------|
-| F-07 | Link → otomatik bilgi çekme (Kariyer.net) | Olmazsa Olmaz | S1 |
-| F-08 | Link → otomatik bilgi çekme (Youthall) | Olmazsa Olmaz | S1 |
-| F-09 | Link → otomatik bilgi çekme (Anbean) | Olmalı | S1 |
 | F-10 | Manuel başvuru ekleme | Olmazsa Olmaz | S1 |
 | F-11 | Başvuru düzenleme | Olmazsa Olmaz | S1 |
 | F-12 | Başvuru silme (onay dialogu + yumuşak silme) | Olmalı | S2 |
@@ -208,14 +205,9 @@ Applyze, iş arayanların Kariyer.net, LinkedIn, Youthall ve Anbean gibi birden 
 - Şifre sıfırlama email ile gerçekleşir
 - Hesap silindiğinde tüm kullanıcı verisi 30 gün yumuşak silme sonrası kalıcı olarak silinir
 
-### FR-02: Otomatik Bilgi Çekme
+### FR-02: Otomatik Bilgi Çekme — KAPSAM DIŞI (v2)
 
-> ⚠️ Bu özellik Sprint 1 başlamadan yapılacak teknik uygunluk araştırmasına bağlıdır. Bkz. Teknik Kısıtlamalar #1.
-
-- Kullanıcı Kariyer.net, Youthall veya Anbean linki yapıştırdığında şirket adı, pozisyon ve lokasyon otomatik doldurulur
-- İşlem 4 saniye içinde tamamlanır
-- Başarısız olursa kullanıcı manuel ekleme akışına yönlendirilir, hata gizlenmez
-- LinkedIn için otomatik bilgi çekme yoktur — kullanıcıya net mesaj gösterilir
+> Faz 0.2 araştırması (Mayıs 2026): Kariyer.net'in PerimeterX bot koruması Supabase Edge Function IP'lerini HTTP 403 ile engelliyor. Kırmızı senaryo gerçekleşti. Özellik MVP'den çıkarıldı, v2'de proxy servisi veya resmi API ile yeniden değerlendirilecek. Tüm platformlar için manuel ekleme akışı kullanılır.
 
 ### FR-03: Başvuru Ekleme ve Düzenleme
 
@@ -287,14 +279,6 @@ Applyze, iş arayanların Kariyer.net, LinkedIn, Youthall ve Anbean gibi birden 
 
 ### EP-02: Başvuru Yönetimi
 
-**US-01:** Bir iş arayan olarak, Kariyer.net linki yapıştırarak başvuru ekleyebilmek istiyorum; böylece form doldurmak zorunda kalmam.
-
-*Kabul Kriterleri:*
-- [ ] Geçerli bir Kariyer.net linki yapıştırıldığında şirket adı, pozisyon ve lokasyon otomatik dolar
-- [ ] İşlem 4 saniye içinde tamamlanır
-- [ ] Kullanıcı doldurulmuş alanları kaydetmeden önce düzenleyebilir
-- [ ] Başarısız olursa hata mesajı gösterilir ve manuel forma yönlendirilir
-
 **US-02:** Bir iş arayan olarak, LinkedIn gibi desteklenmeyen platform ilanlarını manuel olarak ekleyebilmek istiyorum.
 
 *Kabul Kriterleri:*
@@ -348,7 +332,6 @@ Applyze, iş arayanların Kariyer.net, LinkedIn, Youthall ve Anbean gibi birden 
 | Gereksinim | Hedef |
 |-----------|-------|
 | Görsel tahta açılış süresi (50 kartla) | < 2 sn |
-| Otomatik bilgi çekme toplam süresi | < 4 sn |
 | Uygulama soğuk başlangıç | < 3 sn |
 | Arşiv araması (100+ başvuruda) | Anlık |
 
@@ -368,7 +351,6 @@ Applyze, iş arayanların Kariyer.net, LinkedIn, Youthall ve Anbean gibi birden 
 | Veri izolasyonu | Satır bazlı erişim kontrolü her tabloda |
 | API güvenliği | Servis anahtarı yalnızca Edge Functions'ta |
 | Bildirim gizliliği | Önizleme metni genel, şirket adı yok |
-| Otomatik bilgi çekme | URL beyaz listesi — yalnızca izinli domainler |
 
 ### Erişilebilirlik
 
@@ -452,7 +434,6 @@ Sayılar kadar görsel önemli. Analiz "tek bakışta anlama" sağlamalı.
 | Başvuru verisi | Kullanıcı silebilir (yumuşak silme). Hesap silinince tüm veri kalıcı silinir. |
 | Bildirim logu | Son 90 gün saklanır. |
 | Kimlik doğrulama token'ları | Erişim token'ı 1 saat. Yenileme token'ı 30 gün. Çıkışta geçersiz. |
-| Otomatik bilgi çekme geçici verisi | İstemciye iletildikten sonra log tutulmaz. |
 
 ### Analitik Veri Toplama
 
@@ -477,7 +458,6 @@ Sayılar kadar görsel önemli. Analiz "tek bakışta anlama" sağlamalı.
 |--------|-----------|---------|
 | Mobil Framework | Expo (React Native) | iOS + Android tek kod tabanı, hızlı iterasyon |
 | Backend ve Kimlik Doğrulama | Supabase | PostgreSQL, satır bazlı erişim kontrolü, gerçek zamanlı, ücretsiz başlangıç |
-| Otomatik Bilgi Çekme | Supabase Edge Functions (Deno) | Sunucu taraflı web kazıma |
 | Durum Yönetimi | Zustand | Sade, az ortak kod |
 | Gezinme | Expo Router | Dosya tabanlı, derin bağlantı desteği |
 | Bildirimler | Expo Notifications + Supabase cron | Zamanlanmış bildirim |
@@ -495,45 +475,17 @@ CREATE POLICY 'Kullanicilar yalnizca kendi basvirularına erisebilir'
 -- Tüm tablolara aynı politika uygulanır
 ```
 
-### Otomatik Bilgi Çekme Akışı
-
-| Adım | İşlem | Hedef Süre |
-|------|--------|------------|
-| 1 | Kullanıcı linki yapıştırır | 0ms |
-| 2 | Domain kontrolü (beyaz liste) | <50ms |
-| 3 | Platform tespiti | <50ms |
-| 4 | Sayfa getirme (sunucu taraflı) | <2000ms |
-| 5 | HTML ayrıştırma, alan çıkarma | <200ms |
-| 6 | JSON olarak istemciye döndür | <100ms |
-| 7 | Form doldurma animasyonu | <200ms |
-
----
-
 ## 11. Teknik Kısıtlamalar ve Bağımlılıklar
 
 ### Kısıtlamalar
 
 | Kısıtlama | Etki | Çözüm |
 |----------|------|-------|
-| **#1 Otomatik bilgi çekme teknik riski** | Yeşil/sarı/kırmızı senaryoya göre kapsam değişebilir | Sprint 1 öncesi uygunluk araştırması zorunlu. Bkz. aşağıda. |
-| LinkedIn web kazıma engeli | LinkedIn otomatik bilgi çekme yok | Manuel ekleme akışı, kullanıcıya net mesaj |
+| ~~#1 Otomatik bilgi çekme teknik riski~~ | Gerçekleşti (Mayıs 2026) | v2'ye ertelendi (bkz. §13) |
 | Kariyer.net resmi API yok | Web kazıma gerekiyor | Modüler Edge Function parser |
 | Apple Developer ($99/yıl) | Sprint 1 başında açılmalı | Gün 1 görevi |
 | App Store inceleme 1-7 gün | Dağıtım tarihi kesin değil | Sprint 4'te 5 günlük tampon |
 | Supabase ücretsiz başlangıç | 500+ kullanıcıda limit aşılabilir | Pro plan ($25/ay) hazırda |
-
-**Kısıtlama #1 Detayı — Sprint Öncesi Uygunluk Araştırması:**
-
-Sprint 1 kodlama başlamadan yapılacak araştırma:
-- 20-30 farklı Kariyer.net ilanını tarayıcı geliştirici araçlarıyla incele
-- Youthall ve Anbean için aynısını yap
-- Hız sınırı testi yap
-
-| Sonuç | Karar |
-|-------|-------|
-| HTML sunucu taraflı, tutarlı yapı ✅ | Sprint 1'de yaz, başarı hedefi araştırmadan sonra belirlenir |
-| JavaScript ağırlıklı, özel tarayıcı gerekiyor ⚠️ | Puppeteer/Playwright ekle, süre uzar |
-| Engelliyor, güvenilir değil 🔴 | Özellik MVP kapsamından çıkar, manuel ekleme öne çıkar |
 
 ### Dış Bağımlılıklar
 
@@ -575,7 +527,6 @@ Sprint 1 kodlama başlamadan yapılacak araştırma:
 | # | Kriter | Hedef | Sonuç |
 |---|--------|-------|-------|
 | 1 | Görsel tahta 50 kartla açılış | < 2 sn | ☐ |
-| 2 | Otomatik bilgi çekme toplam süresi | < 4 sn | ☐ |
 | 3 | Uygulama soğuk başlangıç | < 3 sn | ☐ |
 | 4 | Beta test 7 gün çökmesiz | 0 çökme | ☐ |
 
@@ -594,6 +545,7 @@ Sprint 1 kodlama başlamadan yapılacak araştırma:
 | Karar | Gerekçe | Yeniden Değerlendirme |
 |-------|---------|----------------------|
 | LinkedIn otomatik bilgi çekme yok | Aktif engelleme — hukuki ve teknik risk | v2: resmi API araştırma |
+| Kariyer.net / Youthall / Anbean otomatik bilgi çekme yok | Kariyer.net'in PerimeterX bot koruması veri merkezi IP'lerini engelliyor (Faz 0.2 — HTTP 403) | v2: proxy servisi veya resmi API ortaklığı |
 | İlan toplama yok | Platform API'si yok. Ortaklık 2.5 ayda kurulamaz | v3: ortaklık stratejisi |
 | Web uygulaması yok | Mobil öncelikli. Kaynak yetersiz | v2: React web |
 | Yapay zeka ilan tavsiyesi yok | Veri birikimi yetersiz | v2: Anthropic API |
