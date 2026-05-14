@@ -9,7 +9,7 @@ import { Header } from "../../components/ui/Header";
 import { Input } from "../../components/ui/Input";
 import { Button } from "../../components/ui/Button";
 import { Card } from "../../components/ui/Card";
-import { mockStore, mockStages, platformLabels, platformColors, stageDisplayNames } from "../../lib/mockData";
+import { mockStore, mockStages, platformLabels, platformColors, stageDisplayNames } from "../../lib/applications";
 import type { Platform, StageKey } from "../../types/database";
 
 const platforms: Platform[] = ["linkedin", "kariyer", "youthall", "anbean", "other"];

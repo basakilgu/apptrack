@@ -16,7 +16,7 @@ import { NoteAddSheet } from "../../components/ui/NoteAddSheet";
 import {
   useApplication, mockStore, mockStages, formatDateLongTr, formatDateTr, getRelativeTimeTr,
   platformColors, platformLabels, stageDisplayNames, getStageOrder,
-} from "../../lib/mockData";
+} from "../../lib/applications";
 import type { StageKey } from "../../types/database";
 
 function MoreIcon({ color = "#1F1B16" }: { color?: string }) {

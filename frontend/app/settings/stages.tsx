@@ -8,7 +8,7 @@ import Svg, { Line } from "react-native-svg";
 import { Header } from "../../components/ui/Header";
 import { Card } from "../../components/ui/Card";
 import { Button } from "../../components/ui/Button";
-import { mockStages, stageDisplayNames } from "../../lib/mockData";
+import { mockStages, stageDisplayNames } from "../../lib/applications";
 
 function DragHandle() {
   return (

@@ -5,7 +5,7 @@ import Svg, { Path } from "react-native-svg";
 
 import { BottomSheet } from "./BottomSheet";
 import { Button } from "./Button";
-import { mockStages, stageDisplayNames } from "../../lib/mockData";
+import { mockStages, stageDisplayNames } from "../../lib/applications";
 import type { StageKey } from "../../types/database";
 
 interface Props {

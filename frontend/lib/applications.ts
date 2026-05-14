@@ -552,5 +552,25 @@ export function getMetrics() {
   };
 }
 
+// Geriye dönük uyumluluk: mock'taki `mockStages` static listesi.
+// Stage cache yüklendiğinde dinamik olur; yüklenmediyse default değerler.
+export const mockStages: Stage[] = (() => {
+  if (_stagesCache.length > 0) return _stagesCache;
+  // Cache henüz boşken kullanılabilecek default stage'ler
+  return [
+    { id: "s1", name: "Başvuruldu",         key: "applied",   order: 1, is_terminal: false, is_default: true, color: "#8FA8B8" },
+    { id: "s2", name: "İK Görüşmesi",       key: "screening", order: 2, is_terminal: false, is_default: true, color: "#9FB892" },
+    { id: "s3", name: "Teknik Mülakat",     key: "interview", order: 3, is_terminal: false, is_default: true, color: "#C4A875" },
+    { id: "s4", name: "Yönetici Görüşmesi", key: "manager",   order: 4, is_terminal: false, is_default: true, color: "#C4A875" },
+    { id: "s5", name: "Teklif",             key: "offer",     order: 5, is_terminal: true,  is_default: true, color: "#7A9270" },
+    { id: "s6", name: "Elenildi",           key: "rejected",  order: 6, is_terminal: true,  is_default: true, color: "#A8908F" },
+  ];
+})();
+
+// Stage'leri dinamik almak için (cache yüklendikten sonra)
+export function getStages(): Stage[] {
+  return _stagesCache.length > 0 ? _stagesCache : mockStages;
+}
+
 // Geriye dönük uyumluluk: mock'taki `mockStore` ismi
 export const mockStore = applicationsStore;
