@@ -8,7 +8,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { StatusBar } from "expo-status-bar";
 import Svg, { Path, Circle, Defs, RadialGradient, Stop } from "react-native-svg";
 
-import { useApplications } from "../../lib/mockData";
+import { useApplications } from "../../lib/applications";
 
 // =============================================================
 // THEME

@@ -10,7 +10,7 @@ import { Input } from "../../../components/ui/Input";
 import { Button } from "../../../components/ui/Button";
 import { Card } from "../../../components/ui/Card";
 import { SectionHeader } from "../../../components/ui/SectionHeader";
-import { mockStore, useApplication, platformLabels, platformColors } from "../../../lib/mockData";
+import { mockStore, useApplication, platformLabels, platformColors } from "../../../lib/applications";
 import type { Platform } from "../../../types/database";
 
 const platforms: Platform[] = ["linkedin", "kariyer", "youthall", "anbean", "other"];
