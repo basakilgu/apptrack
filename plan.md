@@ -575,6 +575,29 @@
 6. **Faz 5.2 (Bildirim altyapısı)** → Faz 5.3, 5.4, 6.5
 7. **Faz 6.1 (Beta) → Faz 6.2 (Hata düzeltme) → Faz 6.5 (Production)**
 
+## Ek C — Sprint 2'ye Devredilen Frontend Görevleri
+
+> 14 Mayıs 2026 smoke test sonucu tespit edildi. Backend tüm fonksiyonlarıyla canlıdır; frontend bağlanması Sprint 2'ye devredildi.
+
+### Tespit edilen UI bug'ları
+- [ ] Detay sayfası: sol-üst `<` geri butonu çalışmıyor (onPress handler yok)
+- [ ] Detay sayfası: sağ-üst `⋯` menüsü açılmıyor (onPress handler yok)
+- [ ] Liste sayfası: kart üzerinde uzun basma menüsü yok
+
+### Henüz frontend'e bağlanmamış backend fonksiyonları
+- [ ] Başvuru silme akışı: backend destekli (`deleted_at` kolonu + RLS), frontend UI eksik
+- [ ] `check-duplicate` Edge Function çağrısı: yeni başvuru formundaki URL alanına onChange ile bağlanacak
+- [ ] Push token kaydetme: `expo-notifications` ile token al, `profiles.expo_push_token` alanına yaz
+- [ ] Bildirim ayarları ekranı: on/off switch + saat aralığı (`notification_hours_start/end`)
+- [ ] Tekrarlayan başvuru uyarısı modalı: `check-duplicate` cevabıyla tetiklenecek
+
+### Doğrulanmış çalışan akışlar (Mayıs 2026 smoke test)
+- ✅ Auth (email + şifre login)
+- ✅ Başvuru CRUD (create + read + stage update + note add)
+- ✅ RLS izolasyonu
+
+---
+
 ## Ek B — Kapsam Dışı (Bu Plana Dahil Değil)
 
 > Yeni istek geldiğinde ilk soru: "Bu olmadan kullanıcı değer alamaz mı?" Cevap "alabilir" ise geride bekler, MVP'ye eklenmez.
