@@ -1,7 +1,7 @@
 # Applyze — Geliştirme Planı (plan.md)
 
-**Versiyon:** v1.1
-**Son Güncelleme:** 22 Nisan 2026 — Faz 1 kısmen tamamlandı (backend + frontend bağlantısı kuruldu)
+**Versiyon:** v1.2
+**Son Güncelleme:** 14 Mayıs 2026 — Faz 0.2 sonucu (🔴 Kırmızı), otomatik bilgi çekme v2'ye ertelendi — Faz 1 kısmen tamamlandı (backend + frontend bağlantısı kuruldu)
 **Kaynak Dokümanlar:** PRD v2.0, MVP Kapsam v2.0, README v1.0
 **Hedef Süre:** 10 Hafta (Sprint 1–4)
 **Platform:** iOS 16+ / Android 10+
@@ -37,9 +37,9 @@
 - [ ] Expo (EAS) hesabı oluştur ve `eas login` ile yerel CLI'ya bağlan.
 - [ ] Google Cloud Console'da OAuth 2.0 Client ID oluştur (iOS + Android + Web için ayrı istemciler).
 
-### 0.2 Teknik Uygunluk Araştırması (Kritik — Risk #1)
+### 0.2 Teknik Uygunluk Araştırması (Kritik — Risk #1) — TAMAMLANDI
 
-> Bu araştırmanın sonucu Sprint 1 kapsamını belirler. Yeşil / Sarı / Kırmızı senaryolardan biri seçilir.
+> **Sonuç (14 Mayıs 2026):** Kariyer.net ilan sayfaları server-side render edilmiş HTML üretiyor (`og:title`, `<h1 data-test="job-title">`, `<span data-test="company-location">` hepsi mevcut). Ancak sunucu, PerimeterX bot koruması (`client.px-cloud.net`) ile Supabase Edge Function IP'lerini HTTP 403 ile engelliyor. **🔴 Kırmızı senaryo gerçekleşti.** Otomatik bilgi çekme MVP'den çıkarıldı, manuel ekleme öne çekildi. Detay için MVP_KAPSAM §12 ve PRD §13.
 
 - [ ] 20–30 farklı Kariyer.net ilan sayfasını tarayıcı geliştirici araçlarıyla incele. HTML'in sunucu taraflı mı yoksa JS ağırlıklı mı render edildiğini tespit et.
 - [ ] Youthall için aynı inceleme: 15–20 farklı ilan.
@@ -234,35 +234,9 @@
 - [ ] Şirket adı ve pozisyon zorunlu; boşken "Kaydet" butonu devre dışı.
 - [ ] Kaydet sonrası kart görsel tahtada "Başvuruldu" sütununda görünür.
 
-### 3.4 Otomatik Bilgi Çekme (F-07, F-08, F-09) — Gün 11–14
+### 3.4 Otomatik Bilgi Çekme — KAPSAM DIŞI
 
-> Faz 0.2 sonucuna göre yeşil senaryoda ilerler. Sarı ise +3–5 gün. Kırmızı ise bu alt başlık atlanır.
-
-#### Backend
-
-- [ ] `supabase/functions/scrape-url/index.ts` içinde platform tespiti yaz (regex ile domain kontrolü).
-- [ ] Kariyer.net parser'ı: HTML'den `og:title`, `og:description`, şirket ve lokasyon çıkar.
-- [ ] Youthall parser'ı: ayrı modül, aynı sözleşme.
-- [ ] Anbean parser'ı: ayrı modül.
-- [ ] Hatalara karşı fallback: Parse başarısız ise `success: false` ve anlamlı `error` kodu döner.
-- [ ] Rate limiting: Aynı kullanıcıdan dakikada 10 istek sınırı.
-- [ ] Edge Function'ı deploy et: `supabase functions deploy scrape-url`.
-- [ ] Her parser için 5 farklı gerçek ilan ile manuel test.
-
-#### Frontend
-
-- [ ] `app/application/new.tsx` formuna üstte "İlan linkini yapıştır" alanı ekle.
-- [ ] Link yapıştırıldığında `scrape-url` Edge Function'ı çağır (loading göstergesi iskelet animasyonu olarak).
-- [ ] Gelen alanları forma doldur; kullanıcı düzenleyebilsin.
-- [ ] LinkedIn linki için özel mesaj: "LinkedIn otomatik doldurmayı desteklemiyor — bilgileri elle gir."
-- [ ] Başarısız çağrıda Toast + forma manuel geçiş.
-
-#### Kabul Kriterleri
-
-- [ ] Geçerli Kariyer.net linki 4 saniye içinde alanları doldurur.
-- [ ] Youthall linki aynı şekilde çalışır.
-- [ ] Kullanıcı doldurulmuş alanları kaydetmeden düzenleyebilir.
-- [ ] 5 farklı Kariyer.net ilanında başarılı test (araştırmada belirlenen başarı hedefine uyumlu).
+> Faz 0.2 sonucu (🔴 Kırmızı senaryo): MVP'den çıkarıldı. v2'de proxy servisi veya resmi API ile yeniden değerlendirilecek. Bu adımda planlanan tüm görevler iptal edildi; kazanılan zaman Faz 3.3 Manuel Ekleme akışının kullanıcı deneyimini güçlendirmek için harcanacak.
 
 ### 3.5 Görsel Takip Tahtası (F-18 → F-21) — Gün 15–18
 
@@ -301,7 +275,7 @@
 #### Sprint 1 Çıkış Kriterleri
 
 - [ ] Kullanıcı kaydolup giriş yapabiliyor.
-- [ ] Manuel ve (yeşil senaryoda) otomatik başvuru ekleyebiliyor.
+- [ ] Manuel başvuru ekleyebiliyor.
 - [ ] Görsel tahtada sürükle-bırak ile aşama değiştirebiliyor.
 - [ ] Arşivde arama yapabiliyor.
 - [ ] Tüm ekranlar iOS ve Android'de çökmeden çalışıyor.
@@ -538,8 +512,6 @@
 
 - [ ] Email kayıt ve giriş çalışıyor.
 - [ ] Google OAuth iOS + Android'de çalışıyor.
-- [ ] Kariyer.net linki 5 ilanda otomatik dolduruyor.
-- [ ] Youthall linki 5 ilanda otomatik dolduruyor.
 - [ ] Manuel ekleme çalışıyor.
 - [ ] 10+ başvuruda görsel tahta akıcı.
 - [ ] Sürükle-bırak tüm kombinasyonlarda çalışıyor.
@@ -555,7 +527,6 @@
 #### Performans
 
 - [ ] 50 kartla tahta < 2 sn açılıyor.
-- [ ] Otomatik bilgi çekme toplam < 4 sn.
 - [ ] Soğuk başlangıç < 3 sn.
 - [ ] Beta 7 gün çökmesiz.
 
@@ -583,7 +554,6 @@
 - [ ] 30. gün aktiflik metriği (hedef > %30).
 - [ ] Başvuru başına kullanıcı (hedef aylık 8+).
 - [ ] Bildirim açılma oranı (hedef > %30).
-- [ ] Otomatik bilgi çekme başarı oranı (araştırmada belirlenen hedef).
 
 ### 7.3 İlk 500 Kullanıcı
 
@@ -597,7 +567,7 @@
 
 ## Ek A — Görev Bağımlılıkları (Kritik Yol)
 
-1. **Faz 0.2 (Uygunluk araştırması)** → Faz 3.4 (Otomatik bilgi çekme)
+1. ~~Faz 0.2 (Uygunluk araştırması) → Faz 3.4 (Otomatik bilgi çekme)~~ — Tamamlandı, Faz 3.4 iptal edildi
 2. **Faz 0.1 (Apple Developer)** → Faz 6.5 (iOS production build)
 3. **Faz 2 (Şema + RLS)** → Tüm Faz 3+ görevleri
 4. **Faz 3.1 (Auth)** → Faz 3.3+ (Tüm başvuru görevleri)
